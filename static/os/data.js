@@ -292,6 +292,7 @@ export const APPS = [
     { id: 'resume', label: 'RESUME', title: 'Resume — Preview', icon: '▧', width: 680, height: 540 },
     { id: 'notepad', label: 'NOTEPAD', title: 'Notepad — personal notes.txt', icon: '▤', width: 620, height: 480 },
     { id: 'games', label: 'GAMES', title: 'Games — Arcade Folder', icon: '◆', width: 720, height: 560 },
+    { id: 'wallpaper', label: 'WALLPAPER STUDIO', title: 'Wallpaper Studio — Pixel Personalization', icon: '✧', width: 880, height: 620 },
     { id: 'recycle', label: 'RECYCLE BIN', title: 'Recycle Bin', icon: '♲', width: 540, height: 400 },
     { id: 'search', label: 'SEARCH', title: 'Search — Find Files', icon: '◎', width: 620, height: 460 },
 ];
@@ -321,6 +322,10 @@ export const SEARCH_ENTRIES = [
     { term: 'Recycle Bin', title: 'Recycle Bin', app: 'recycle', detail: 'Old bugs and bad code' },
     { term: 'Skills', title: 'Skill folders', app: 'skills', detail: 'QA, standards, tools, and development' },
     { term: 'Games', title: 'Games folder', app: 'games', detail: 'Snake, Minesweeper, Tic-Tac-Toe, Memory' },
+    { term: 'Wallpaper', title: 'Wallpaper Studio', app: 'wallpaper', detail: 'Pixel wallpapers, creator, and effects' },
+    { term: 'Personalization', title: 'Personalization', app: 'wallpaper', detail: 'Wallpaper, pixel dog, and CRT effects' },
+    { term: 'Dog', title: 'Cute Dog Paint', app: 'wallpaper', detail: 'Draw a pup and set it as wallpaper' },
+    { term: 'Pixel Art', title: 'Pixel Creator', app: 'wallpaper', detail: 'Draw tiny pixel masterpieces' },
 ];
 
 export const COMMANDS = [
@@ -332,6 +337,7 @@ export const COMMANDS = [
     { label: 'Open Email', app: 'email' },
     { label: 'Open Resume', app: 'resume' },
     { label: 'Open Games', app: 'games' },
+    { label: 'Open Wallpaper Studio', app: 'wallpaper' },
     { label: 'Open Notepad', app: 'notepad' },
     { label: 'Search GitHub', action: 'github' },
     { label: 'Download CV', action: 'resume-download' },

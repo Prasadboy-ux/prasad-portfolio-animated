@@ -1,5 +1,6 @@
 // PRASAD DESKTOP — application views, window content, and games.
 import { PROFILE, ABOUT, EXPERIENCES, SKILLS, PROJECTS, SEARCH_ENTRIES, RESUME_CV } from './data.js';
+import { wallpaperStudioView } from './wallpaper-studio.js';
 
 const escapeHtml = (value) => String(value)
     .replace(/&/g, '&amp;')
@@ -1148,6 +1149,7 @@ export function getView(appId, options, ctx) {
         case 'recycle': return recycleView(ctx);
         case 'search': return searchView(ctx);
         case 'games': return gamesView(ctx);
+        case 'wallpaper': return wallpaperStudioView();
         default: return makeView('<h2 class="app-section-title">FILE NOT FOUND</h2><p>That application does not exist.</p>');
     }
 }

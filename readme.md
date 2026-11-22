@@ -27,23 +27,11 @@ This portfolio combines my professional background in **Quality Assurance Engine
 
 ## 👨‍💻 About This Project
 
-PRASAD DESKTOP is my personal portfolio project, customized and extended from an original MIT-licensed animated desktop portfolio.
+PRASAD DESKTOP is my personal portfolio project, built to reflect my professional journey, QA engineering experience, personal projects, and growing interest in software development.
 
-I transformed the original foundation into a portfolio that reflects my professional journey, QA engineering experience, personal projects, and growing interest in software development.
+My development work includes portfolio content, UI enhancements, application development, interactive features, debugging, testing, and AI-assisted coding.
 
-My development work includes customization, UI enhancements, application development, interactive features, debugging, testing, and AI-assisted coding.
-
-### Original Project Attribution
-
-The project was originally inspired by and built upon the animated desktop portfolio created by **Henry Heffernan**.
-
-- **Original project:** [portfolio-website](https://github.com/henryjeff/portfolio-website)
-- **Original creator:** Henry Heffernan
-- **Original license:** MIT License
-
-The original attribution and license are preserved in [`LICENSE.md`](LICENSE.md).
-
-### My Customization & Development
+### Development
 
 **Prakash Prasad**
 
@@ -206,9 +194,7 @@ If deploying to another hosting provider or custom domain, update the metadata U
 
 ## 📜 License & Credits
 
-This project retains the original **MIT License** and attribution for the original foundation.
-
-The original work is credited to Henry Heffernan, while my customizations, portfolio content, development, and extensions are credited to **Prakash Prasad**.
+This project is licensed under the MIT License. Portfolio content, development, customizations, and extensions are credited to **Prakash Prasad**.
 
 See [`LICENSE.md`](LICENSE.md) for the complete license.
 

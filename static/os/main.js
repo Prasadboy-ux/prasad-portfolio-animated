@@ -2,6 +2,8 @@
 import { APPS, COMMANDS, PROFILE } from './data.js';
 import { getView } from './apps.js';
 import { createSfxEngine, createMusicEngine } from './audio.js';
+import { initPersonalization } from './personalization.js';
+import { initDogCompanion } from './dog-companion.js';
 
 const $ = (selector) => document.querySelector(selector);
 const clamp = (value, min, max) => Math.min(Math.max(value, min), Math.max(min, max));
@@ -590,7 +592,7 @@ function openWindow(appId, options = {}) {
     element.setAttribute('role', 'dialog');
     element.setAttribute('aria-label', meta.title);
 
-    const isGrey = ['games', 'recycle', 'projects', 'skills'].includes(appId);
+    const isGrey = ['games', 'recycle', 'projects', 'skills', 'wallpaper'].includes(appId);
     element.innerHTML = `
         <div class="titlebar">
             <span class="title-icon" aria-hidden="true">${meta.icon}</span>
@@ -777,10 +779,8 @@ contextMenu.addEventListener('click', (event) => {
         toast('Icons arranged neatly.');
     }
     if (action === 'personalize') {
-        const themes = ['', 'alt-1', 'alt-2'];
-        const current = themes.findIndex((theme) => wallpaper.classList.contains(theme));
-        wallpaper.className = 'wallpaper ' + themes[(current + 1) % themes.length];
-        toast('Wallpaper changed.');
+        openWindow('wallpaper');
+        toast('Wallpaper Studio opened.');
     }
     playSound('click');
 });
@@ -1045,6 +1045,9 @@ function updateClock() {
 }
 
 /* -------------------------------- boot -------------------------------- */
+initPersonalization();
+initDogCompanion();
+window.addEventListener('prasad-dog-click', () => playSound('open'));
 renderIcons();
 renderSoundToggle();
 music.setVolume(storedVolume / 100);
