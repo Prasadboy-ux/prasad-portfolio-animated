@@ -1,0 +1,102 @@
+- generic [ref=e2]:
+  - main "Prasad Desktop" [ref=e4]:
+    - button "Pixel dog companion — click to greet":
+      - generic [ref=e5] [cursor=pointer]
+    - generic:
+      - button "COMPUTER — double-click, press Enter, or tap twice to open" [ref=e7]:
+        - generic [aria-hidden] [ref=e8]: ▣
+        - generic [ref=e9]: COMPUTER
+      - button "EXPERIENCE — double-click, press Enter, or tap twice to open" [ref=e10]:
+        - generic [aria-hidden] [ref=e11]: ▤
+        - generic [ref=e12]: EXPERIENCE
+      - button "SKILLS — double-click, press Enter, or tap twice to open" [ref=e13]:
+        - generic [aria-hidden] [ref=e14]: ▥
+        - generic [ref=e15]: SKILLS
+      - button "PROJECTS — double-click, press Enter, or tap twice to open" [ref=e16]:
+        - generic [aria-hidden] [ref=e17]: ▦
+        - generic [ref=e18]: PROJECTS
+      - button "INTERNET — double-click, press Enter, or tap twice to open" [ref=e19]:
+        - generic [aria-hidden] [ref=e20]: ◎
+        - generic [ref=e21]: INTERNET
+      - button "EMAIL — double-click, press Enter, or tap twice to open" [ref=e22]:
+        - generic [aria-hidden] [ref=e23]: ✉
+        - generic [ref=e24]: EMAIL
+      - button "RESUME — double-click, press Enter, or tap twice to open" [ref=e25]:
+        - generic [aria-hidden] [ref=e26]: ▧
+        - generic [ref=e27]: RESUME
+      - button "NOTEPAD — double-click, press Enter, or tap twice to open" [ref=e28]:
+        - generic [aria-hidden] [ref=e29]: ▤
+        - generic [ref=e30]: NOTEPAD
+      - button "GAMES — double-click, press Enter, or tap twice to open" [active] [ref=e31]:
+        - generic [aria-hidden] [ref=e32]: ◆
+        - generic [ref=e33]: GAMES
+      - button "WALLPAPER STUDIO — double-click, press Enter, or tap twice to open" [ref=e34]:
+        - generic [aria-hidden] [ref=e35]: ✧
+        - generic [ref=e36]: WALLPAPER STUDIO
+      - button "RECYCLE BIN — double-click, press Enter, or tap twice to open" [ref=e37]:
+        - generic [aria-hidden] [ref=e38]: ♲
+        - generic [ref=e39]: RECYCLE BIN
+      - button "SEARCH — double-click, press Enter, or tap twice to open" [ref=e40]:
+        - generic [aria-hidden] [ref=e41]: ◎
+        - generic [ref=e42]: SEARCH
+    - dialog "Games — Arcade Folder" [ref=e502]:
+      - generic [ref=e503]:
+        - generic [aria-hidden] [ref=e504]: ◆
+        - generic [ref=e505]: Games — Arcade Folder
+        - generic [ref=e506]:
+          - button "Minimize" [ref=e507] [cursor=pointer]: _
+          - button "Maximize" [ref=e508] [cursor=pointer]: □
+          - button "Close" [ref=e509] [cursor=pointer]: ×
+      - generic [aria-hidden] [ref=e510]:
+        - generic [ref=e511]: File
+        - generic [ref=e512]: Edit
+        - generic [ref=e513]: View
+        - generic [ref=e514]: Help
+      - generic [ref=e515]:
+        - heading "GAMES FOLDER" [level=2] [ref=e516]
+        - paragraph [ref=e517]: Four playable retro games — no installs, no downloads
+        - generic [ref=e518]: HI-SCORE PANEL — saved in this browser
+        - generic [ref=e520]:
+          - generic [ref=e521]:
+            - text: SNAKE
+            - strong [ref=e522]: "0"
+          - generic [ref=e523]:
+            - text: MINES
+            - strong [ref=e524]: "0"
+          - generic [ref=e525]:
+            - text: MEMORY
+            - strong [ref=e526]: —
+          - button "RESET HI-SCORES" [ref=e527] [cursor=pointer]
+        - tablist [ref=e528]:
+          - button "SNAKE" [ref=e529] [cursor=pointer]
+          - button "MINESWEEPER" [ref=e530] [cursor=pointer]
+          - button "TIC-TAC-TOE" [ref=e531] [cursor=pointer]
+          - button "MEMORY" [ref=e532] [cursor=pointer]
+        - generic [ref=e533]:
+          - generic [ref=e534]:
+            - generic [ref=e535]: ▶ SNAKE.EXE
+            - generic [ref=e536]: "SCORE: 0 / 40"
+          - generic [ref=e539]:
+            - button "RESTART" [ref=e540] [cursor=pointer]
+            - button "▲" [ref=e541] [cursor=pointer]
+            - button "◀" [ref=e542] [cursor=pointer]
+            - button "▼" [ref=e543] [cursor=pointer]
+            - button "▶" [ref=e544] [cursor=pointer]
+          - paragraph [ref=e545]: Arrow keys / WASD to steer • or tap the arrow buttons
+      - generic [ref=e546]:
+        - generic [ref=e547]: C:\PRASAD\GAMES> READY
+        - generic [ref=e548]: PRASAD DESKTOP
+  - contentinfo [ref=e43]:
+    - button "Open Start menu" [ref=e44] [cursor=pointer]:
+      - generic [ref=e50]: Start
+    - button "Switch to Games — Arcade Folder" [ref=e557] [cursor=pointer]:
+      - generic [ref=e559]: Games — Arcade Folder
+    - generic [ref=e52]:
+      - button "Search" [ref=e53] [cursor=pointer]: ◎
+      - button "Pause music" [pressed] [ref=e113] [cursor=pointer]: ❚❚
+      - generic "Guitar Lofi" [ref=e114]
+      - slider "Music volume" [ref=e59]: "35"
+      - button "Mute music" [ref=e60] [cursor=pointer]: 🔊
+      - button "Toggle CRT effects" [pressed] [ref=e62] [cursor=pointer]: CRT
+      - button "Enable UI sounds" [ref=e63] [cursor=pointer]: 🔇
+      - generic "Sunday, November 22, 2026" [ref=e64]: 05:14 PM

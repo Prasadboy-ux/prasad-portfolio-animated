@@ -1,0 +1,83 @@
+- generic [ref=f2e2]:
+  - main "Prasad Desktop" [ref=f2e4]:
+    - button "Pixel dog companion — click to greet":
+      - generic: Welcome to Prasad's Desktop!
+      - generic [ref=f2e5] [cursor=pointer]
+      - generic [aria-hidden]: Zzz
+    - generic:
+      - button "COMPUTER — double-click, press Enter, or tap twice to open" [ref=f2e7]:
+        - generic [aria-hidden] [ref=f2e8]: ▣
+        - generic [ref=f2e9]: COMPUTER
+      - button "EXPERIENCE — double-click, press Enter, or tap twice to open" [ref=f2e10]:
+        - generic [aria-hidden] [ref=f2e11]: ▤
+        - generic [ref=f2e12]: EXPERIENCE
+      - button "SKILLS — double-click, press Enter, or tap twice to open" [ref=f2e13]:
+        - generic [aria-hidden] [ref=f2e14]: ▥
+        - generic [ref=f2e15]: SKILLS
+      - button "PROJECTS — double-click, press Enter, or tap twice to open" [ref=f2e16]:
+        - generic [aria-hidden] [ref=f2e17]: ▦
+        - generic [ref=f2e18]: PROJECTS
+      - button "INTERNET — double-click, press Enter, or tap twice to open" [ref=f2e19]:
+        - generic [aria-hidden] [ref=f2e20]: ◎
+        - generic [ref=f2e21]: INTERNET
+      - button "EMAIL — double-click, press Enter, or tap twice to open" [ref=f2e22]:
+        - generic [aria-hidden] [ref=f2e23]: ✉
+        - generic [ref=f2e24]: EMAIL
+      - button "RESUME — double-click, press Enter, or tap twice to open" [ref=f2e25]:
+        - generic [aria-hidden] [ref=f2e26]: ▧
+        - generic [ref=f2e27]: RESUME
+      - button "NOTEPAD — double-click, press Enter, or tap twice to open" [ref=f2e28]:
+        - generic [aria-hidden] [ref=f2e29]: ▤
+        - generic [ref=f2e30]: NOTEPAD
+      - button "GAMES — double-click, press Enter, or tap twice to open" [ref=f2e31]:
+        - generic [aria-hidden] [ref=f2e32]: ◆
+        - generic [ref=f2e33]: GAMES
+      - button "WALLPAPER STUDIO — double-click, press Enter, or tap twice to open" [ref=f2e34]:
+        - generic [aria-hidden] [ref=f2e35]: ✧
+        - generic [ref=f2e36]: WALLPAPER STUDIO
+      - button "RECYCLE BIN — double-click, press Enter, or tap twice to open" [active] [ref=f2e37]:
+        - generic [aria-hidden] [ref=f2e38]: ♲
+        - generic [ref=f2e39]: RECYCLE BIN
+      - button "SEARCH — double-click, press Enter, or tap twice to open" [ref=f2e40]:
+        - generic [aria-hidden] [ref=f2e41]: ◎
+        - generic [ref=f2e42]: SEARCH
+    - dialog "Recycle Bin" [ref=f2e651]:
+      - generic [ref=f2e652]:
+        - generic [aria-hidden] [ref=f2e653]: ♲
+        - generic [ref=f2e654]: Recycle Bin
+        - generic [ref=f2e655]:
+          - button "Minimize" [ref=f2e656] [cursor=pointer]: _
+          - button "Maximize" [ref=f2e657] [cursor=pointer]: □
+          - button "Close" [ref=f2e658] [cursor=pointer]: ×
+      - generic [aria-hidden] [ref=f2e659]:
+        - generic [ref=f2e660]: File
+        - generic [ref=f2e661]: Edit
+        - generic [ref=f2e662]: View
+        - generic [ref=f2e663]: Help
+      - generic [ref=f2e665]:
+        - generic [ref=f2e666]: ♲
+        - heading "RECYCLE BIN" [level=2] [ref=f2e667]
+        - generic [ref=f2e668]: Nothing deleted. Just old bugs and bad code 😂
+        - paragraph [ref=f2e669]:
+          - text: "Deleted items:"
+          - strong [ref=f2e670]: "0"
+          - text: "Lessons learned from old bugs:"
+          - strong [ref=f2e671]: too many to count
+        - paragraph [ref=f2e672]: "Tip: real files are safe. Probably."
+      - generic [ref=f2e673]:
+        - generic [ref=f2e674]: C:\PRASAD\RECYCLE> READY
+        - generic [ref=f2e675]: PRASAD DESKTOP
+  - contentinfo [ref=f2e43]:
+    - button "Open Start menu" [ref=f2e44] [cursor=pointer]:
+      - generic [ref=f2e50]: Start
+    - button "Switch to Recycle Bin" [ref=f2e684] [cursor=pointer]:
+      - generic [ref=f2e686]: Recycle Bin
+    - generic [ref=f2e52]:
+      - button "Search" [ref=f2e53] [cursor=pointer]: ◎
+      - button "Pause music" [pressed] [ref=f2e114] [cursor=pointer]: ❚❚
+      - generic "Guitar Lofi" [ref=f2e59]
+      - slider "Music volume" [ref=f2e60]: "35"
+      - button "Mute music" [ref=f2e61] [cursor=pointer]: 🔊
+      - button "Toggle CRT effects" [pressed] [ref=f2e63] [cursor=pointer]: CRT
+      - button "Enable UI sounds" [ref=f2e64] [cursor=pointer]: 🔇
+      - generic "Sunday, November 22, 2026" [ref=f2e65]: 05:15 PM

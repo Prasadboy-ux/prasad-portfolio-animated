@@ -116,20 +116,33 @@ br {
 }
 
 .bios-start-button {
+    appearance: none;
     background-color: #000;
     border: 4px solid #fff;
     border-width: 4px 3px 4px 3px;
+    color: #fff;
+    font: inherit;
+    letter-spacing: inherit;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
 }
 
-.bios-start-button p {
+.bios-start-button span {
     box-sizing: border-box;
+    display: block;
     padding: 8px;
 }
 
-.bios-start-button:hover p {
+.bios-start-button:hover span,
+.bios-start-button:focus-visible span {
     background-color: #fff;
-    cursor: pointer;
     color: #000;
+}
+
+.bios-start-button:focus-visible {
+    outline: 3px dashed #ffe07a;
+    outline-offset: 3px;
 }
 
 .loading-screen-header {

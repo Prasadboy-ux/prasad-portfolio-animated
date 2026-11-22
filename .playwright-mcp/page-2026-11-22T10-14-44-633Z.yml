@@ -1,0 +1,218 @@
+- generic [ref=e2]:
+  - main "Prasad Desktop" [ref=e4]:
+    - button "Pixel dog companion — click to greet":
+      - generic [ref=e5] [cursor=pointer]
+    - generic:
+      - button "COMPUTER — double-click, press Enter, or tap twice to open" [ref=e7]:
+        - generic [aria-hidden] [ref=e8]: ▣
+        - generic [ref=e9]: COMPUTER
+      - button "EXPERIENCE — double-click, press Enter, or tap twice to open" [ref=e10]:
+        - generic [aria-hidden] [ref=e11]: ▤
+        - generic [ref=e12]: EXPERIENCE
+      - button "SKILLS — double-click, press Enter, or tap twice to open" [ref=e13]:
+        - generic [aria-hidden] [ref=e14]: ▥
+        - generic [ref=e15]: SKILLS
+      - button "PROJECTS — double-click, press Enter, or tap twice to open" [ref=e16]:
+        - generic [aria-hidden] [ref=e17]: ▦
+        - generic [ref=e18]: PROJECTS
+      - button "INTERNET — double-click, press Enter, or tap twice to open" [ref=e19]:
+        - generic [aria-hidden] [ref=e20]: ◎
+        - generic [ref=e21]: INTERNET
+      - button "EMAIL — double-click, press Enter, or tap twice to open" [ref=e22]:
+        - generic [aria-hidden] [ref=e23]: ✉
+        - generic [ref=e24]: EMAIL
+      - button "RESUME — double-click, press Enter, or tap twice to open" [ref=e25]:
+        - generic [aria-hidden] [ref=e26]: ▧
+        - generic [ref=e27]: RESUME
+      - button "NOTEPAD — double-click, press Enter, or tap twice to open" [ref=e28]:
+        - generic [aria-hidden] [ref=e29]: ▤
+        - generic [ref=e30]: NOTEPAD
+      - button "GAMES — double-click, press Enter, or tap twice to open" [ref=e31]:
+        - generic [aria-hidden] [ref=e32]: ◆
+        - generic [ref=e33]: GAMES
+      - button "WALLPAPER STUDIO — double-click, press Enter, or tap twice to open" [ref=e34]:
+        - generic [aria-hidden] [ref=e35]: ✧
+        - generic [ref=e36]: WALLPAPER STUDIO
+      - button "RECYCLE BIN — double-click, press Enter, or tap twice to open" [ref=e37]:
+        - generic [aria-hidden] [ref=e38]: ♲
+        - generic [ref=e39]: RECYCLE BIN
+      - button "SEARCH — double-click, press Enter, or tap twice to open" [ref=e40]:
+        - generic [aria-hidden] [ref=e41]: ◎
+        - generic [ref=e42]: SEARCH
+    - dialog "Search — Find Files" [ref=e687]:
+      - generic [ref=e688]:
+        - generic [aria-hidden] [ref=e689]: ◎
+        - generic [ref=e690]: Search — Find Files
+        - generic [ref=e691]:
+          - button "Minimize" [ref=e692] [cursor=pointer]: _
+          - button "Maximize" [ref=e693] [cursor=pointer]: □
+          - button "Close" [ref=e694] [cursor=pointer]: ×
+      - generic [aria-hidden] [ref=e695]:
+        - generic [ref=e696]: File
+        - generic [ref=e697]: Edit
+        - generic [ref=e698]: View
+        - generic [ref=e699]: Help
+      - generic [ref=e700]:
+        - heading "SEARCH" [level=2] [ref=e701]
+        - generic [ref=e702]:
+          - searchbox "Search desktop" [active] [ref=e703]
+          - button "CLEAR" [ref=e704] [cursor=pointer]
+        - paragraph [ref=e705]: "Try: Prasad · QA Engineer · Experience · Rubber · ISO · IATF · Auditor · SPC · Python · AI · MOKA POS · Projects · GitHub · LinkedIn · Contact · Resume · Notepad · Recycle Bin · Skills · About · Games"
+        - generic [ref=e706]:
+          - button "▣ About Prakash Prasad Profile, Then vs Now, and story" [ref=e707] [cursor=pointer]:
+            - generic [ref=e708]: ▣
+            - generic [ref=e709]:
+              - strong [ref=e710]: About Prakash Prasad
+              - generic [ref=e711]: Profile, Then vs Now, and story
+          - button "▣ About me Profile, Then vs Now, and story" [ref=e712] [cursor=pointer]:
+            - generic [ref=e713]: ▣
+            - generic [ref=e714]:
+              - strong [ref=e715]: About me
+              - generic [ref=e716]: Profile, Then vs Now, and story
+          - button "▣ Quality Assurance Engineer Current role and quality work" [ref=e717] [cursor=pointer]:
+            - generic [ref=e718]: ▣
+            - generic [ref=e719]:
+              - strong [ref=e720]: Quality Assurance Engineer
+              - generic [ref=e721]: Current role and quality work
+          - button "▣ Quality skills QA/QC, IQC, IPQC, FQI, OQC" [ref=e722] [cursor=pointer]:
+            - generic [ref=e723]: ▣
+            - generic [ref=e724]:
+              - strong [ref=e725]: Quality skills
+              - generic [ref=e726]: QA/QC, IQC, IPQC, FQI, OQC
+          - button "▣ Career timeline Four roles, newest to oldest" [ref=e727] [cursor=pointer]:
+            - generic [ref=e728]: ▣
+            - generic [ref=e729]:
+              - strong [ref=e730]: Career timeline
+              - generic [ref=e731]: Four roles, newest to oldest
+          - button "▣ Rubber manufacturing Materials and process quality" [ref=e732] [cursor=pointer]:
+            - generic [ref=e733]: ▣
+            - generic [ref=e734]:
+              - strong [ref=e735]: Rubber manufacturing
+              - generic [ref=e736]: Materials and process quality
+          - button "▣ ISO 9001 / ISO 14001 Quality and environmental standards" [ref=e737] [cursor=pointer]:
+            - generic [ref=e738]: ▣
+            - generic [ref=e739]:
+              - strong [ref=e740]: ISO 9001 / ISO 14001
+              - generic [ref=e741]: Quality and environmental standards
+          - button "▣ IATF 16949 Automotive quality standard" [ref=e742] [cursor=pointer]:
+            - generic [ref=e743]: ▣
+            - generic [ref=e744]:
+              - strong [ref=e745]: IATF 16949
+              - generic [ref=e746]: Automotive quality standard
+          - button "▣ Lead Auditor experience PT DiGiSi GLOBAL SURVEY" [ref=e747] [cursor=pointer]:
+            - generic [ref=e748]: ▣
+            - generic [ref=e749]:
+              - strong [ref=e750]: Lead Auditor experience
+              - generic [ref=e751]: PT DiGiSi GLOBAL SURVEY
+          - button "▣ SPC Statistical process control" [ref=e752] [cursor=pointer]:
+            - generic [ref=e753]: ▣
+            - generic [ref=e754]:
+              - strong [ref=e755]: SPC
+              - generic [ref=e756]: Statistical process control
+          - button "▣ Digital IPQC/SPC Project folder" [ref=e757] [cursor=pointer]:
+            - generic [ref=e758]: ▣
+            - generic [ref=e759]:
+              - strong [ref=e760]: Digital IPQC/SPC
+              - generic [ref=e761]: Project folder
+          - button "▣ Python Development skill" [ref=e762] [cursor=pointer]:
+            - generic [ref=e763]: ▣
+            - generic [ref=e764]:
+              - strong [ref=e765]: Python
+              - generic [ref=e766]: Development skill
+          - button "▣ AI Artificial intelligence skill" [ref=e767] [cursor=pointer]:
+            - generic [ref=e768]: ▣
+            - generic [ref=e769]:
+              - strong [ref=e770]: AI
+              - generic [ref=e771]: Artificial intelligence skill
+          - button "▣ AI Agent experiments Project folder" [ref=e772] [cursor=pointer]:
+            - generic [ref=e773]: ▣
+            - generic [ref=e774]:
+              - strong [ref=e775]: AI Agent experiments
+              - generic [ref=e776]: Project folder
+          - button "▣ All projects Five project folders" [ref=e777] [cursor=pointer]:
+            - generic [ref=e778]: ▣
+            - generic [ref=e779]:
+              - strong [ref=e780]: All projects
+              - generic [ref=e781]: Five project folders
+          - button "▣ MOKA POS Verified public repository" [ref=e782] [cursor=pointer]:
+            - generic [ref=e783]: ▣
+            - generic [ref=e784]:
+              - strong [ref=e785]: MOKA POS
+              - generic [ref=e786]: Verified public repository
+          - button "▣ GitHub links Prasadboy-ux profile" [ref=e787] [cursor=pointer]:
+            - generic [ref=e788]: ▣
+            - generic [ref=e789]:
+              - strong [ref=e790]: GitHub links
+              - generic [ref=e791]: Prasadboy-ux profile
+          - button "▣ LinkedIn link Professional profile" [ref=e792] [cursor=pointer]:
+            - generic [ref=e793]: ▣
+            - generic [ref=e794]:
+              - strong [ref=e795]: LinkedIn link
+              - generic [ref=e796]: Professional profile
+          - button "▣ Contact / Email Send a message" [ref=e797] [cursor=pointer]:
+            - generic [ref=e798]: ▣
+            - generic [ref=e799]:
+              - strong [ref=e800]: Contact / Email
+              - generic [ref=e801]: Send a message
+          - button "▣ Resume preview Preview and PDF download" [ref=e802] [cursor=pointer]:
+            - generic [ref=e803]: ▣
+            - generic [ref=e804]:
+              - strong [ref=e805]: Resume preview
+              - generic [ref=e806]: Preview and PDF download
+          - button "▣ Personal notes Story, goals, and developer journey" [ref=e807] [cursor=pointer]:
+            - generic [ref=e808]: ▣
+            - generic [ref=e809]:
+              - strong [ref=e810]: Personal notes
+              - generic [ref=e811]: Story, goals, and developer journey
+          - button "▣ Recycle Bin Old bugs and bad code" [ref=e812] [cursor=pointer]:
+            - generic [ref=e813]: ▣
+            - generic [ref=e814]:
+              - strong [ref=e815]: Recycle Bin
+              - generic [ref=e816]: Old bugs and bad code
+          - button "▣ Skill folders QA, standards, tools, and development" [ref=e817] [cursor=pointer]:
+            - generic [ref=e818]: ▣
+            - generic [ref=e819]:
+              - strong [ref=e820]: Skill folders
+              - generic [ref=e821]: QA, standards, tools, and development
+          - button "▣ Games folder Snake, Minesweeper, Tic-Tac-Toe, Memory" [ref=e822] [cursor=pointer]:
+            - generic [ref=e823]: ▣
+            - generic [ref=e824]:
+              - strong [ref=e825]: Games folder
+              - generic [ref=e826]: Snake, Minesweeper, Tic-Tac-Toe, Memory
+          - button "▣ Wallpaper Studio Pixel wallpapers, creator, and effects" [ref=e827] [cursor=pointer]:
+            - generic [ref=e828]: ▣
+            - generic [ref=e829]:
+              - strong [ref=e830]: Wallpaper Studio
+              - generic [ref=e831]: Pixel wallpapers, creator, and effects
+          - button "▣ Personalization Wallpaper, pixel dog, and CRT effects" [ref=e832] [cursor=pointer]:
+            - generic [ref=e833]: ▣
+            - generic [ref=e834]:
+              - strong [ref=e835]: Personalization
+              - generic [ref=e836]: Wallpaper, pixel dog, and CRT effects
+          - button "▣ Cute Dog Paint Draw a pup and set it as wallpaper" [ref=e837] [cursor=pointer]:
+            - generic [ref=e838]: ▣
+            - generic [ref=e839]:
+              - strong [ref=e840]: Cute Dog Paint
+              - generic [ref=e841]: Draw a pup and set it as wallpaper
+          - button "▣ Pixel Creator Draw tiny pixel masterpieces" [ref=e842] [cursor=pointer]:
+            - generic [ref=e843]: ▣
+            - generic [ref=e844]:
+              - strong [ref=e845]: Pixel Creator
+              - generic [ref=e846]: Draw tiny pixel masterpieces
+      - generic [ref=e847]:
+        - generic [ref=e848]: C:\PRASAD\SEARCH> READY
+        - generic [ref=e849]: PRASAD DESKTOP
+  - contentinfo [ref=e43]:
+    - button "Open Start menu" [ref=e44] [cursor=pointer]:
+      - generic [ref=e50]: Start
+    - button "Switch to Search — Find Files" [ref=e858] [cursor=pointer]:
+      - generic [ref=e860]: Search — Find Files
+    - generic [ref=e52]:
+      - button "Search" [ref=e53] [cursor=pointer]: ◎
+      - button "Pause music" [pressed] [ref=e113] [cursor=pointer]: ❚❚
+      - generic "Guitar Lofi" [ref=e114]
+      - slider "Music volume" [ref=e59]: "35"
+      - button "Mute music" [ref=e60] [cursor=pointer]: 🔊
+      - button "Toggle CRT effects" [pressed] [ref=e62] [cursor=pointer]: CRT
+      - button "Enable UI sounds" [ref=e63] [cursor=pointer]: 🔇
+      - generic "Sunday, November 22, 2026" [ref=e64]: 05:14 PM

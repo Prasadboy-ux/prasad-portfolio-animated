@@ -1,0 +1,105 @@
+- generic [ref=e2]:
+  - main "Prasad Desktop" [ref=e4]:
+    - button "Pixel dog companion — click to greet":
+      - generic [ref=e5] [cursor=pointer]
+    - generic:
+      - button "COMPUTER — double-click, press Enter, or tap twice to open" [ref=e7]:
+        - generic [aria-hidden] [ref=e8]: ▣
+        - generic [ref=e9]: COMPUTER
+      - button "EXPERIENCE — double-click, press Enter, or tap twice to open" [ref=e10]:
+        - generic [aria-hidden] [ref=e11]: ▤
+        - generic [ref=e12]: EXPERIENCE
+      - button "SKILLS — double-click, press Enter, or tap twice to open" [ref=e13]:
+        - generic [aria-hidden] [ref=e14]: ▥
+        - generic [ref=e15]: SKILLS
+      - button "PROJECTS — double-click, press Enter, or tap twice to open" [ref=e16]:
+        - generic [aria-hidden] [ref=e17]: ▦
+        - generic [ref=e18]: PROJECTS
+      - button "INTERNET — double-click, press Enter, or tap twice to open" [active] [ref=e19]:
+        - generic [aria-hidden] [ref=e20]: ◎
+        - generic [ref=e21]: INTERNET
+      - button "EMAIL — double-click, press Enter, or tap twice to open" [ref=e22]:
+        - generic [aria-hidden] [ref=e23]: ✉
+        - generic [ref=e24]: EMAIL
+      - button "RESUME — double-click, press Enter, or tap twice to open" [ref=e25]:
+        - generic [aria-hidden] [ref=e26]: ▧
+        - generic [ref=e27]: RESUME
+      - button "NOTEPAD — double-click, press Enter, or tap twice to open" [ref=e28]:
+        - generic [aria-hidden] [ref=e29]: ▤
+        - generic [ref=e30]: NOTEPAD
+      - button "GAMES — double-click, press Enter, or tap twice to open" [ref=e31]:
+        - generic [aria-hidden] [ref=e32]: ◆
+        - generic [ref=e33]: GAMES
+      - button "WALLPAPER STUDIO — double-click, press Enter, or tap twice to open" [ref=e34]:
+        - generic [aria-hidden] [ref=e35]: ✧
+        - generic [ref=e36]: WALLPAPER STUDIO
+      - button "RECYCLE BIN — double-click, press Enter, or tap twice to open" [ref=e37]:
+        - generic [aria-hidden] [ref=e38]: ♲
+        - generic [ref=e39]: RECYCLE BIN
+      - button "SEARCH — double-click, press Enter, or tap twice to open" [ref=e40]:
+        - generic [aria-hidden] [ref=e41]: ◎
+        - generic [ref=e42]: SEARCH
+    - dialog "Internet Explorer — Links" [ref=e334]:
+      - generic [ref=e335]:
+        - generic [aria-hidden] [ref=e336]: ◎
+        - generic [ref=e337]: Internet Explorer — Links
+        - generic [ref=e338]:
+          - button "Minimize" [ref=e339] [cursor=pointer]: _
+          - button "Maximize" [ref=e340] [cursor=pointer]: □
+          - button "Close" [ref=e341] [cursor=pointer]: ×
+      - generic [aria-hidden] [ref=e342]:
+        - generic [ref=e343]: File
+        - generic [ref=e344]: Edit
+        - generic [ref=e345]: View
+        - generic [ref=e346]: Help
+      - generic [ref=e347]:
+        - heading "INTERNET EXPLORER" [level=2] [ref=e348]
+        - generic [ref=e349]:
+          - generic [ref=e350]:
+            - generic [ref=e351]: ADDRESS
+            - textbox "Address" [ref=e352]: https://github.com/Prasadboy-ux
+          - button "GO" [ref=e353] [cursor=pointer]
+        - generic [ref=e354]:
+          - heading "Prasad's Web Links" [level=2] [ref=e355]
+          - paragraph [ref=e356]: Professional profiles and portfolio destinations
+          - link "in LinkedIn https://www.linkedin.com/in/prakash-prasad-550a1a1/" [ref=e357] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/prakash-prasad-550a1a1/
+            - generic [ref=e358]: in
+            - generic [ref=e359]:
+              - strong [ref=e360]: LinkedIn
+              - generic [ref=e361]: https://www.linkedin.com/in/prakash-prasad-550a1a1/
+          - link ">_ GitHub https://github.com/Prasadboy-ux" [ref=e362] [cursor=pointer]:
+            - /url: https://github.com/Prasadboy-ux
+            - generic [ref=e363]: ">_"
+            - generic [ref=e364]:
+              - strong [ref=e365]: GitHub
+              - generic [ref=e366]: https://github.com/Prasadboy-ux
+          - link "◎ Portfolio (3D site) /" [ref=e367] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e368]: ◎
+            - generic [ref=e369]:
+              - strong [ref=e370]: Portfolio (3D site)
+              - generic [ref=e371]: /
+          - link "▣ This Desktop /os/index.html" [ref=e372] [cursor=pointer]:
+            - /url: /os/index.html
+            - generic [ref=e373]: ▣
+            - generic [ref=e374]:
+              - strong [ref=e375]: This Desktop
+              - generic [ref=e376]: /os/index.html
+      - generic [ref=e377]:
+        - generic [ref=e378]: C:\PRASAD\INTERNET> READY
+        - generic [ref=e379]: PRASAD DESKTOP
+  - contentinfo [ref=e43]:
+    - button "Open Start menu" [ref=e44] [cursor=pointer]:
+      - generic [ref=e50]: Start
+    - button "Switch to Internet Explorer — Links" [ref=e388] [cursor=pointer]:
+      - generic [ref=e390]: Internet Explorer — Links
+    - generic [ref=e52]:
+      - button "Search" [ref=e53] [cursor=pointer]: ◎
+      - button "Pause music" [pressed] [ref=e113] [cursor=pointer]: ❚❚
+      - generic "Guitar Lofi" [ref=e114]
+      - slider "Music volume" [ref=e59]: "35"
+      - button "Mute music" [ref=e60] [cursor=pointer]: 🔊
+      - button "Toggle CRT effects" [pressed] [ref=e62] [cursor=pointer]: CRT
+      - button "Enable UI sounds" [ref=e63] [cursor=pointer]: 🔇
+      - generic "Sunday, November 22, 2026" [ref=e64]: 05:14 PM

@@ -2,34 +2,104 @@
 // The pet lives below desktop icons and windows, so it never blocks the workspace.
 import { DOG_SKINS, getSettings, subscribe } from './personalization.js';
 
-const BUBBLES = [
-    'Hi! 👋',
-    'Welcome to Prasad\'s Desktop!',
-    'Nice to meet you!',
-    'Woof! 🐾',
-    'Ready to explore?',
-];
-
-const SLEEP_BUBBLES = ['Zzz...', 'Dreaming of pixels...'];
 const SPRITE_W = 24;
 const SPRITE_H = 20;
 const BASE_PIXEL = 3;
+const MIN_X = 4;
+const EDGE_GAP = 4;
+
+const STATES = ['idle', 'walking', 'waving', 'sitting', 'sleeping', 'happy'];
+const GREETINGS = ['Hi! 👋', "Welcome to Prasad's Desktop!"];
+const FRIENDLY = [
+    'Hi! 👋',
+    "Welcome to Prasad's Desktop!",
+    'Nice to meet you!',
+    'Woof! 🐾',
+    'Ready to explore?',
+    'Happy to see you!',
+];
+
+const DARK = '#2b1d16';
+const CREAM = '#fff3de';
+const NOSE = '#3c2a28';
+const WHITE = '#ffffff';
+
+// Pose descriptors are compiled once into tiny canvases: a real frame-based sprite
+// system with no asset downloads and no per-frame pixel loops.
+const POSES = {
+    idle: [
+        { tail: 'mid' },
+        { tail: 'high' },
+        { tail: 'high', bob: 1, eyes: 'blink' },
+        { tail: 'mid', bob: 1, eyes: 'blink' },
+        { tail: 'low' },
+        { tail: 'mid' },
+    ],
+    walking: [
+        { tail: 'low', legs: 'walk0' },
+        { tail: 'mid', bob: 1, legs: 'walk1' },
+        { tail: 'high', legs: 'walk2' },
+        { tail: 'mid', bob: 1, legs: 'walk3' },
+        { tail: 'low', legs: 'walk4' },
+        { tail: 'mid', legs: 'walk5' },
+    ],
+    waving: [
+        { tail: 'high', paw: 'up', mouth: 'smile' },
+        { tail: 'high', paw: 'mid', mouth: 'smile' },
+    ],
+    sitting: [
+        { sit: true, tail: 'low' },
+        { sit: true, tail: 'mid' },
+        { sit: true, tail: 'high', bob: 1, eyes: 'blink' },
+        { sit: true, tail: 'mid' },
+    ],
+    sleeping: [
+        { sit: true, tail: 'low', eyes: 'closed', mouth: 'sleep' },
+        { sit: true, tail: 'low', bob: 1, eyes: 'closed', mouth: 'sleep' },
+    ],
+    happy: [
+        { tail: 'high', eyes: 'happy', paw: 'up', mouth: 'open' },
+        { tail: 'high', bob: 1, eyes: 'happy', paw: 'mid', mouth: 'open' },
+    ],
+};
+
+const DURATIONS = {
+    idle: 4200,
+    walking: 5400,
+    waving: 1680,
+    sitting: 3800,
+    sleeping: 4600,
+    happy: 1900,
+};
+
+const FRAME_MS = {
+    idle: 180,
+    walking: 110,
+    waving: 210,
+    sitting: 240,
+    sleeping: 520,
+    happy: 160,
+};
 
 let root = null;
+let hitButton = null;
 let spriteWrap = null;
 let canvas = null;
 let ctx = null;
 let bubble = null;
+let zzz = null;
 let desktop = null;
 let state = 'idle';
-let stateUntil = 0;
-let bubbleUntil = 0;
+let stateStart = 0;
+let stateDuration = 0;
+let frameIndex = 0;
+let lastDrawnState = '';
 let bubbleToken = 0;
 let direction = 1;
 let x = 0;
 let y = 0;
-let frame = 0;
-let lastFrame = 0;
+let jumpY = 0;
+let lastFrameTime = 0;
 let lastTime = 0;
 let raf = 0;
 let settings = getSettings().dog;
@@ -37,6 +107,11 @@ let customImage = null;
 let customSource = null;
 let unsubscribe = null;
 let initialized = false;
+let visitorX = null;
+let lastTransform = '';
+let lastFaceTransform = '';
+const frameCache = new Map();
+let cachedSkin = '';
 
 const reducedMotionQuery = typeof window.matchMedia === 'function'
     ? window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -46,71 +121,152 @@ function clamp(value, min, max) {
     return Math.min(Math.max(value, min), Math.max(min, max));
 }
 
-function rect(ctxTarget, px, py, w, h, color) {
-    ctxTarget.fillStyle = color;
-    ctxTarget.fillRect(px, py, w, h);
+function rect(target, px, py, w, h, color) {
+    target.fillStyle = color;
+    target.fillRect(px, py, w, h);
 }
 
 function skinFor(id) {
     return DOG_SKINS.find((skin) => skin.id === id) || DOG_SKINS[0];
 }
 
-function drawBuiltInDog(target, currentState, step) {
-    const skin = skinFor(settings.skin);
-    const fur = skin.fur;
-    const ear = skin.ear;
-    const cheek = skin.cheek;
-    const dark = '#2b1d16';
-    const cream = '#fff3de';
-    const nose = '#3c2a28';
-    const sleeping = currentState === 'sleep';
-    const sitting = currentState === 'sit';
-    const waving = currentState === 'wave' || currentState === 'click';
-    const bodyY = sitting ? 9 : 8;
-    const headY = sitting ? 5 : 4;
-
-    rect(target, 19, 10 + (step ? -1 : 1), 3, 3, fur);
-    rect(target, 21, 9 + (step ? -2 : 0), 2, 2, ear);
-    rect(target, 6, bodyY, 12, 7, fur);
-    rect(target, 8, bodyY + 4, 7, 3, cream);
-    rect(target, 5, headY, 3, 6, ear);
-    rect(target, 16, headY, 3, 6, ear);
-    rect(target, 7, headY, 10, 8, fur);
-    rect(target, 8, headY + 7, 8, 2, cream);
-    rect(target, 7, headY + 6, 2, 2, cheek);
-    rect(target, 15, headY + 6, 2, 2, cheek);
-
-    if (sleeping) {
-        rect(target, 9, headY + 4, 3, 1, dark);
-        rect(target, 14, headY + 4, 3, 1, dark);
+function drawTail(target, position, skin) {
+    if (position === 'high') {
+        rect(target, 18, 9, 3, 3, skin.fur);
+        rect(target, 20, 8, 2, 2, skin.ear);
+    } else if (position === 'low') {
+        rect(target, 18, 13, 3, 2, skin.fur);
+        rect(target, 20, 12, 2, 2, skin.ear);
     } else {
-        const blink = step === 2;
-        rect(target, 9, headY + 3, blink ? 3 : 1, blink ? 1 : 2, dark);
-        rect(target, 14, headY + 3, blink ? 3 : 1, blink ? 1 : 2, dark);
-    }
-    rect(target, 11, headY + 6, 2, 2, nose);
-
-    if (currentState === 'walk' && !sitting) {
-        rect(target, step ? 6 : 7, 15, 3, 3, ear);
-        rect(target, step ? 15 : 14, 15, 3, 3, ear);
-    } else if (sitting || sleeping) {
-        rect(target, 6, 16, 5, 2, ear);
-        rect(target, 13, 16, 5, 2, ear);
-    } else {
-        rect(target, 7, 15, 3, 3, ear);
-        rect(target, 14, 15, 3, 3, ear);
-    }
-
-    if (waving) {
-        const lift = step ? 2 : 0;
-        rect(target, 17, 10 - lift, 3, 5, fur);
-        rect(target, 17, 9 - lift, 3, 2, cream);
+        rect(target, 18, 11, 3, 3, skin.fur);
+        rect(target, 20, 10, 2, 2, skin.ear);
     }
 }
 
-function drawCustomDog(target, currentState, step) {
+function drawLegs(target, legs, skin) {
+    if (legs === 'sit') {
+        rect(target, 7, 17, 5, 2, skin.ear);
+        rect(target, 13, 17, 5, 2, skin.ear);
+        rect(target, 8, 18, 3, 1, CREAM);
+        rect(target, 14, 18, 3, 1, CREAM);
+        return;
+    }
+    const patterns = {
+        stand: [[7, 16], [14, 16]],
+        walk0: [[6, 16], [15, 16]],
+        walk1: [[7, 15], [14, 17]],
+        walk2: [[8, 16], [13, 16]],
+        walk3: [[7, 17], [14, 15]],
+        walk4: [[6, 16], [15, 16]],
+        walk5: [[8, 15], [13, 17]],
+    };
+    const pair = patterns[legs] || patterns.stand;
+    pair.forEach(([px, py]) => {
+        rect(target, px, py, 3, 3, skin.ear);
+        rect(target, px, py + 2, 3, 1, CREAM);
+    });
+}
+
+function drawEyes(target, eyes, headY) {
+    if (eyes === 'blink' || eyes === 'closed') {
+        rect(target, 9, headY + 4, 3, 1, DARK);
+        rect(target, 13, headY + 4, 3, 1, DARK);
+        if (eyes === 'closed') {
+            rect(target, 9, headY + 3, 1, 1, DARK);
+            rect(target, 15, headY + 3, 1, 1, DARK);
+        }
+        return;
+    }
+    if (eyes === 'happy') {
+        rect(target, 9, headY + 4, 1, 1, DARK);
+        rect(target, 10, headY + 3, 1, 1, DARK);
+        rect(target, 11, headY + 4, 1, 1, DARK);
+        rect(target, 13, headY + 4, 1, 1, DARK);
+        rect(target, 14, headY + 3, 1, 1, DARK);
+        rect(target, 15, headY + 4, 1, 1, DARK);
+        return;
+    }
+    rect(target, 9, headY + 3, 2, 2, DARK);
+    rect(target, 13, headY + 3, 2, 2, DARK);
+    rect(target, 9, headY + 3, 1, 1, WHITE);
+    rect(target, 13, headY + 3, 1, 1, WHITE);
+}
+
+function drawMouth(target, mouth, headY, cheek) {
+    if (mouth === 'open') {
+        rect(target, 10, headY + 8, 4, 2, DARK);
+        rect(target, 11, headY + 9, 2, 1, cheek);
+    } else if (mouth === 'sleep') {
+        rect(target, 11, headY + 8, 2, 1, DARK);
+    } else {
+        rect(target, 11, headY + 8, 2, 1, DARK);
+        rect(target, 10, headY + 7, 1, 1, DARK);
+        rect(target, 13, headY + 7, 1, 1, DARK);
+    }
+}
+
+function drawPaw(target, paw, headY, skin) {
+    if (paw === 'up') {
+        rect(target, 17, headY + 2, 3, 5, skin.fur);
+        rect(target, 17, headY + 1, 3, 2, CREAM);
+    } else if (paw === 'mid') {
+        rect(target, 17, headY + 4, 3, 4, skin.fur);
+        rect(target, 17, headY + 3, 3, 2, CREAM);
+    }
+}
+
+function drawPose(target, pose, skin) {
+    const bob = pose.bob || 0;
+    const sitting = Boolean(pose.sit);
+    const bodyY = (sitting ? 10 : 8) + bob;
+    const headY = (sitting ? 4 : 3) + bob;
+
+    drawTail(target, pose.tail || 'mid', skin);
+
+    if (sitting) {
+        rect(target, 7, bodyY, 11, 8, skin.fur);
+        rect(target, 9, bodyY + 4, 7, 3, CREAM);
+    } else {
+        rect(target, 6, bodyY, 12, 8, skin.fur);
+        rect(target, 8, bodyY + 4, 8, 3, CREAM);
+    }
+
+    rect(target, 5, headY, 3, 7, skin.ear);
+    rect(target, 16, headY, 3, 7, skin.ear);
+    rect(target, 6, headY + 4, 1, 2, NOSE);
+    rect(target, 17, headY + 4, 1, 2, NOSE);
+
+    rect(target, 7, headY, 10, 9, skin.fur);
+    rect(target, 8, headY + 6, 8, 3, CREAM);
+    rect(target, 7, headY + 7, 2, 2, skin.cheek);
+    rect(target, 15, headY + 7, 2, 2, skin.cheek);
+
+    drawEyes(target, pose.eyes || 'open', headY);
+    rect(target, 11, headY + 6, 2, 1, NOSE);
+    drawMouth(target, pose.mouth || 'smile', headY, skin.cheek);
+    drawLegs(target, sitting ? 'sit' : (pose.legs || 'stand'), skin);
+    if (pose.paw) drawPaw(target, pose.paw, headY, skin);
+}
+
+function frameFor(stateName, index) {
+    const skin = skinFor(settings.skin);
+    const key = `${skin.id}:${stateName}:${index}`;
+    let frame = frameCache.get(key);
+    if (!frame) {
+        frame = document.createElement('canvas');
+        frame.width = SPRITE_W;
+        frame.height = SPRITE_H;
+        const frameCtx = frame.getContext('2d');
+        frameCtx.imageSmoothingEnabled = false;
+        drawPose(frameCtx, (POSES[stateName] || POSES.idle)[index], skin);
+        frameCache.set(key, frame);
+    }
+    return frame;
+}
+
+function drawCustomDog(target, currentState, index) {
     if (!customImage) {
-        drawBuiltInDog(target, currentState, step);
+        target.drawImage(frameFor(currentState, index), 0, 0);
         return;
     }
     const size = Math.min(customImage.width, customImage.height);
@@ -126,22 +282,25 @@ function drawCustomDog(target, currentState, step) {
         SPRITE_W,
         SPRITE_H,
     );
-    if (currentState === 'wave' || currentState === 'click') {
-        rect(target, 18, step ? 7 : 9, 4, 5, '#fff3de');
-        rect(target, 18, step ? 6 : 8, 4, 2, skinFor(settings.skin).fur);
+    if (currentState === 'waving' || currentState === 'happy') {
+        const skin = skinFor(settings.skin);
+        const headY = index % 2 === 0 ? 3 : 4;
+        drawPaw(target, index % 2 === 0 ? 'up' : 'mid', headY, skin);
     }
 }
 
 function drawDog() {
     if (!ctx) return;
     ctx.clearRect(0, 0, SPRITE_W, SPRITE_H);
-    if (settings.customAvatar) drawCustomDog(ctx, state, frame);
-    else drawBuiltInDog(ctx, state, frame);
+    if (settings.customAvatar) drawCustomDog(ctx, state, frameIndex);
+    else ctx.drawImage(frameFor(state, frameIndex), 0, 0);
+    lastDrawnState = state;
 }
 
-function dimensions() {
-    const scale = clamp(settings.size, 0.7, 1.6);
-    return { w: SPRITE_W * BASE_PIXEL * scale, h: SPRITE_H * BASE_PIXEL * scale };
+function effectiveSize() {
+    const cap = desktop && desktop.clientWidth < 760 ? 1.15 : 1.6;
+    const scale = clamp(settings.size, 0.7, cap);
+    return { scale, w: SPRITE_W * BASE_PIXEL * scale, h: SPRITE_H * BASE_PIXEL * scale };
 }
 
 function overlapsDesktopUi(left, top, width, height) {
@@ -150,13 +309,13 @@ function overlapsDesktopUi(left, top, width, height) {
     const elements = desktop.querySelectorAll('.desktop-icon, .window:not([hidden])');
     for (const element of elements) {
         if (!element.offsetParent && element !== document.activeElement) continue;
-        const rect = element.getBoundingClientRect();
+        const elementRect = element.getBoundingClientRect();
         const deskRect = desktop.getBoundingClientRect();
         const item = {
-            left: rect.left - deskRect.left,
-            top: rect.top - deskRect.top,
-            right: rect.right - deskRect.left,
-            bottom: rect.bottom - deskRect.top,
+            left: elementRect.left - deskRect.left,
+            top: elementRect.top - deskRect.top,
+            right: elementRect.right - deskRect.left,
+            bottom: elementRect.bottom - deskRect.top,
         };
         if (box.left < item.right && box.right > item.left && box.top < item.bottom && box.bottom > item.top) return true;
     }
@@ -165,59 +324,133 @@ function overlapsDesktopUi(left, top, width, height) {
 
 function reposition() {
     if (!desktop || !root) return;
-    const size = dimensions();
-    const maxX = Math.max(4, desktop.clientWidth - size.w - 4);
-    const maxY = Math.max(4, desktop.clientHeight - size.h - 4);
-    x = clamp(x || desktop.clientWidth * 0.28, 4, maxX);
-    y = clamp(y || (maxY - 8), 4, maxY);
-    root.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    const { w, h, scale } = effectiveSize();
+    root.style.setProperty('--dog-scale', String(scale));
+    const maxX = Math.max(MIN_X, desktop.clientWidth - w - EDGE_GAP);
+    const maxY = Math.max(MIN_X, desktop.clientHeight - h - EDGE_GAP);
+    x = clamp(x || desktop.clientWidth * 0.28, MIN_X, maxX);
+    y = clamp(y || (maxY - 8), MIN_X, maxY);
+    renderPosition();
 }
 
-function showBubble(message, duration = 2200) {
+function renderPosition() {
+    if (!root) return;
+    const transform = `translate3d(${x}px, ${y + jumpY}px, 0)`;
+    if (transform === lastTransform) return;
+    root.style.transform = transform;
+    lastTransform = transform;
+}
+
+function renderFace(customBob = 0) {
+    if (!spriteWrap) return;
+    const transform = `scaleX(${direction})${customBob ? ` translateY(${customBob}px)` : ''}`;
+    if (transform === lastFaceTransform) return;
+    spriteWrap.style.transform = transform;
+    lastFaceTransform = transform;
+}
+
+function hideBubble() {
+    if (bubble) bubble.hidden = true;
+}
+
+function showBubble(message, duration) {
     if (!bubble) return;
     const token = ++bubbleToken;
+    if (!settings.speech) {
+        hideBubble();
+        return;
+    }
     bubble.textContent = message;
     bubble.hidden = false;
-    bubbleUntil = performance.now() + duration;
     window.setTimeout(() => {
-        if (token === bubbleToken) bubble.hidden = true;
-    }, duration + 80);
+        if (token === bubbleToken) hideBubble();
+    }, duration);
+}
+
+function presentBubbles(messages, total) {
+    if (!bubble) return;
+    const token = ++bubbleToken;
+    hideBubble();
+    const slice = total / messages.length;
+    messages.forEach((message, index) => {
+        window.setTimeout(() => {
+            if (token !== bubbleToken || !settings.speech || !settings.visible) return;
+            bubble.textContent = message;
+            bubble.hidden = false;
+        }, index * slice);
+    });
+    window.setTimeout(() => {
+        if (token === bubbleToken) hideBubble();
+    }, total + 160);
 }
 
 function randomOf(list) {
     return list[Math.floor(Math.random() * list.length)];
 }
 
-function enter(nextState, now = performance.now()) {
-    state = nextState;
-    frame = 0;
-    const speed = clamp(settings.speed, 0.25, 2.5);
-    const base = {
-        walk: 6200,
-        idle: 4800,
-        wave: 2100,
-        sit: 3600,
-        sleep: 5200,
-        click: 1900,
-    }[nextState] || 4000;
-    stateUntil = now + base / speed;
-    if (nextState === 'wave') showBubble(randomOf(BUBBLES), Math.min(2600, base / speed));
-    if (nextState === 'sleep') showBubble(randomOf(SLEEP_BUBBLES), Math.min(2200, base / speed));
-    drawDog();
+function durationFor(nextState) {
+    const base = DURATIONS[nextState] || DURATIONS.idle;
+    const jitter = nextState === 'walking' ? 0.8 + Math.random() * 0.5 : 1;
+    return (base * jitter) / clamp(settings.speed, 0.25, 2.5);
 }
 
-function pickNextState() {
-    if (settings.idleOnly || !settings.walking || reducedMotionQuery.matches) {
-        const list = ['idle', 'idle', 'sit', 'wave', 'idle', 'sleep'];
-        enter(randomOf(list));
+function visitorDirection() {
+    if (!root || !desktop) return 1;
+    const dogRect = root.getBoundingClientRect();
+    const dogCenter = dogRect ? dogRect.left + dogRect.width / 2 : x;
+    const target = visitorX === null
+        ? desktop.getBoundingClientRect().left + desktop.clientWidth / 2
+        : visitorX;
+    return target < dogCenter ? -1 : 1;
+}
+
+function enter(nextState, now = performance.now()) {
+    if (!STATES.includes(nextState)) return;
+    state = nextState;
+    stateStart = now;
+    stateDuration = durationFor(nextState);
+    frameIndex = 0;
+    jumpY = 0;
+    if (nextState === 'waving') {
+        direction = visitorDirection();
+        presentBubbles(GREETINGS, stateDuration);
+    } else if (nextState === 'happy') {
+        direction = visitorDirection();
+        showBubble(randomOf(FRIENDLY), stateDuration);
+    }
+    if (zzz) zzz.hidden = nextState !== 'sleeping';
+    drawDog();
+    renderFace();
+    renderPosition();
+}
+
+function pickNextState(now) {
+    const roll = Math.random();
+    if (reducedMotionQuery.matches) {
+        enter(randomOf(['idle', 'idle', 'sitting', 'waving', 'sleeping']), now);
         return;
     }
-    const roll = Math.random();
-    if (roll < 0.48) enter('walk');
-    else if (roll < 0.68) enter('idle');
-    else if (roll < 0.8) enter('wave');
-    else if (roll < 0.91) enter('sit');
-    else enter('sleep');
+    if (!settings.walking || settings.idleOnly) {
+        if (roll < 0.42) enter('idle', now);
+        else if (roll < 0.66) enter('waving', now);
+        else if (roll < 0.86) enter('sitting', now);
+        else enter('sleeping', now);
+        return;
+    }
+    if (roll < 0.42) enter('walking', now);
+    else if (roll < 0.6) enter('idle', now);
+    else if (roll < 0.76) enter('waving', now);
+    else if (roll < 0.9) enter('sitting', now);
+    else enter('sleeping', now);
+}
+
+function frameIndexFor(now) {
+    const delay = (FRAME_MS[state] || FRAME_MS.idle) / clamp(settings.speed, 0.25, 2.5);
+    const elapsed = Math.max(0, now - stateStart);
+    if (state === 'waving') {
+        return Math.min(7, Math.floor(elapsed / delay)) % POSES.waving.length;
+    }
+    return Math.floor(elapsed / delay) % (POSES[state] || POSES.idle).length;
 }
 
 function tick(time) {
@@ -225,37 +458,47 @@ function tick(time) {
         raf = 0;
         return;
     }
-    const dt = lastTime ? Math.min(64, time - lastTime) : 16;
-    lastTime = time;
-    if (time >= stateUntil) pickNextState();
-
-    const size = dimensions();
-    if (state === 'walk' && settings.walking && !settings.idleOnly) {
-        const speed = clamp(settings.speed, 0.25, 2.5);
-        const step = direction * 24 * speed * (dt / 1000);
-        let nextX = x + step;
-        const maxX = Math.max(4, desktop.clientWidth - size.w - 4);
-        if (nextX <= 4 || nextX >= maxX) {
-            direction *= -1;
-            nextX = clamp(nextX, 4, maxX);
-        }
-        if (overlapsDesktopUi(nextX, y, size.w, size.h)) {
-            direction *= -1;
-        } else {
-            x = nextX;
-        }
-        spriteWrap.style.transform = `scaleX(${direction})`;
-    }
-
-    const frameDelay = Math.max(70, 165 / clamp(settings.speed, 0.25, 2.5));
-    if (time - lastFrame > frameDelay) {
-        frame = (frame + 1) % 3;
-        lastFrame = time;
-        drawDog();
-    }
-    if (bubbleUntil && time > bubbleUntil) bubbleUntil = 0;
-    root.style.transform = `translate3d(${x}px, ${y}px, 0)`;
     raf = requestAnimationFrame(tick);
+    const speed = clamp(settings.speed, 0.25, 2.5);
+    const frameDelay = Math.max(60, (FRAME_MS[state] || FRAME_MS.idle) / speed);
+    if (time - lastFrameTime < Math.min(50, frameDelay / 2)) return;
+    const dt = lastTime ? Math.min(90, time - lastTime) : 16;
+    lastFrameTime = time;
+    lastTime = time;
+
+    if (time - stateStart >= stateDuration) pickNextState(time);
+
+    const { w, h, scale } = effectiveSize();
+    if (state === 'walking') {
+        const step = direction * 24 * speed * (dt / 1000);
+        const maxX = Math.max(MIN_X, desktop.clientWidth - w - EDGE_GAP);
+        let nextX = x + step;
+        if (nextX <= MIN_X || nextX >= maxX) {
+            direction *= -1;
+            nextX = clamp(nextX, MIN_X, maxX);
+        }
+        if (overlapsDesktopUi(nextX, y, w, h)) direction *= -1;
+        else x = nextX;
+    }
+
+    if (state === 'happy') {
+        const progress = clamp((time - stateStart) / stateDuration, 0, 1);
+        jumpY = -Math.round(Math.sin(progress * Math.PI) * 9 * scale);
+    } else {
+        jumpY = 0;
+    }
+
+    const nextFrame = frameIndexFor(time);
+    const needsDraw = nextFrame !== frameIndex || state !== lastDrawnState;
+    frameIndex = nextFrame;
+
+    let customBob = 0;
+    if (settings.customAvatar && (state === 'idle' || state === 'sitting' || state === 'sleeping')) {
+        customBob = Math.round(Math.sin(time / 420) * (state === 'sleeping' ? 0.6 : 1));
+    }
+    if (needsDraw) drawDog();
+    renderFace(customBob);
+    renderPosition();
 }
 
 function stopLoop() {
@@ -268,15 +511,31 @@ function stopLoop() {
 function startLoop() {
     if (raf || !settings.visible || document.hidden || reducedMotionQuery.matches) return;
     lastTime = 0;
+    lastFrameTime = 0;
     raf = requestAnimationFrame(tick);
+}
+
+function renderStatic() {
+    jumpY = 0;
+    if (zzz) zzz.hidden = state !== 'sleeping';
+    drawDog();
+    renderFace();
+    renderPosition();
 }
 
 function reactToClick() {
     if (!settings.visible) return;
-    enter('click');
-    showBubble(randomOf(BUBBLES), 2400);
     window.dispatchEvent(new CustomEvent('prasad-dog-click'));
-    if (reducedMotionQuery.matches) window.setTimeout(drawDog, 1200);
+    enter('happy', performance.now());
+    if (reducedMotionQuery.matches) {
+        renderStatic();
+        window.setTimeout(() => {
+            if (!reducedMotionQuery.matches || state !== 'happy') return;
+            enter('idle', performance.now());
+            hideBubble();
+            renderStatic();
+        }, 1200);
+    }
 }
 
 function loadCustomAvatar(source) {
@@ -302,21 +561,30 @@ function loadCustomAvatar(source) {
 }
 
 function applySettings(next) {
+    const previousSettings = settings;
     settings = { ...settings, ...next.dog };
+    if (settings.skin !== previousSettings.skin) frameCache.clear();
     if (!root) return;
     root.hidden = !settings.visible;
-    root.style.setProperty('--dog-scale', String(clamp(settings.size, 0.7, 1.6)));
+    if (!settings.speech) {
+        bubbleToken += 1;
+        hideBubble();
+    }
     loadCustomAvatar(settings.customAvatar);
     reposition();
-    drawDog();
     if (settings.visible && !reducedMotionQuery.matches) startLoop();
-    else stopLoop();
+    else {
+        stopLoop();
+        if (settings.visible) renderStatic();
+    }
+    drawDog();
 }
 
 function onReducedMotionChange() {
     if (reducedMotionQuery.matches) {
         stopLoop();
-        enter('idle');
+        enter('idle', performance.now());
+        renderStatic();
     } else {
         startLoop();
     }
@@ -329,28 +597,27 @@ export function initDogCompanion() {
     root = document.createElement('aside');
     root.id = 'dog-companion';
     root.className = 'dog-companion';
-    root.setAttribute('role', 'button');
-    root.setAttribute('tabindex', '0');
-    root.setAttribute('aria-label', 'Pixel dog companion — click to greet');
+    root.setAttribute('aria-label', 'Pixel dog companion');
     root.innerHTML = `
         <div class="dog-bubble" hidden></div>
-        <div class="dog-sprite-wrap"><canvas class="dog-sprite" width="${SPRITE_W}" height="${SPRITE_H}" aria-hidden="true"></canvas></div>
+        <button type="button" class="dog-hit" aria-label="Greet the pixel dog companion">
+            <span class="dog-sprite-wrap"><canvas class="dog-sprite" width="${SPRITE_W}" height="${SPRITE_H}" aria-hidden="true"></canvas></span>
+        </button>
+        <span class="dog-zzz" aria-hidden="true" hidden>Zzz</span>
     `;
     desktop.insertBefore(root, desktop.firstChild);
+    hitButton = root.querySelector('.dog-hit');
     bubble = root.querySelector('.dog-bubble');
     spriteWrap = root.querySelector('.dog-sprite-wrap');
     canvas = root.querySelector('.dog-sprite');
+    zzz = root.querySelector('.dog-zzz');
     ctx = canvas.getContext('2d');
     ctx.imageSmoothingEnabled = false;
 
-    root.addEventListener('click', reactToClick);
-    root.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault();
-            reactToClick();
-        }
-    });
-
+    hitButton.addEventListener('click', reactToClick);
+    window.addEventListener('pointermove', (event) => {
+        visitorX = event.clientX;
+    }, { passive: true });
     document.addEventListener('visibilitychange', () => {
         if (document.hidden) stopLoop();
         else startLoop();
@@ -373,5 +640,21 @@ export function destroyDogCompanion() {
     stopLoop();
     if (unsubscribe) unsubscribe();
     if (root) root.remove();
+    root = null;
+    hitButton = null;
     initialized = false;
+}
+
+// Read-only diagnostics, also used by the companion's automated checks.
+export function getDogState() {
+    return {
+        state,
+        x,
+        y,
+        direction,
+        frame: frameIndex,
+        visible: settings.visible,
+        speech: settings.speech,
+        bubble: bubble ? bubble.textContent : '',
+    };
 }

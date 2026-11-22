@@ -1,0 +1,52 @@
+- generic [ref=e2]:
+  - main "Prasad Desktop" [ref=e4]:
+    - button "Pixel dog companion — click to greet":
+      - generic [ref=e5] [cursor=pointer]
+    - generic:
+      - button "COMPUTER — double-click, press Enter, or tap twice to open" [ref=e7]:
+        - generic [aria-hidden] [ref=e8]: ▣
+        - generic [ref=e9]: COMPUTER
+      - button "EXPERIENCE — double-click, press Enter, or tap twice to open" [ref=e10]:
+        - generic [aria-hidden] [ref=e11]: ▤
+        - generic [ref=e12]: EXPERIENCE
+      - button "SKILLS — double-click, press Enter, or tap twice to open" [ref=e13]:
+        - generic [aria-hidden] [ref=e14]: ▥
+        - generic [ref=e15]: SKILLS
+      - button "PROJECTS — double-click, press Enter, or tap twice to open" [ref=e16]:
+        - generic [aria-hidden] [ref=e17]: ▦
+        - generic [ref=e18]: PROJECTS
+      - button "INTERNET — double-click, press Enter, or tap twice to open" [ref=e19]:
+        - generic [aria-hidden] [ref=e20]: ◎
+        - generic [ref=e21]: INTERNET
+      - button "EMAIL — double-click, press Enter, or tap twice to open" [ref=e22]:
+        - generic [aria-hidden] [ref=e23]: ✉
+        - generic [ref=e24]: EMAIL
+      - button "RESUME — double-click, press Enter, or tap twice to open" [ref=e25]:
+        - generic [aria-hidden] [ref=e26]: ▧
+        - generic [ref=e27]: RESUME
+      - button "NOTEPAD — double-click, press Enter, or tap twice to open" [ref=e28]:
+        - generic [aria-hidden] [ref=e29]: ▤
+        - generic [ref=e30]: NOTEPAD
+      - button "GAMES — double-click, press Enter, or tap twice to open" [ref=e31]:
+        - generic [aria-hidden] [ref=e32]: ◆
+        - generic [ref=e33]: GAMES
+      - button "WALLPAPER STUDIO — double-click, press Enter, or tap twice to open" [ref=e34]:
+        - generic [aria-hidden] [ref=e35]: ✧
+        - generic [ref=e36]: WALLPAPER STUDIO
+      - button "RECYCLE BIN — double-click, press Enter, or tap twice to open" [ref=e37]:
+        - generic [aria-hidden] [ref=e38]: ♲
+        - generic [ref=e39]: RECYCLE BIN
+      - button "SEARCH — double-click, press Enter, or tap twice to open" [ref=e40]:
+        - generic [aria-hidden] [ref=e41]: ◎
+        - generic [ref=e42]: SEARCH
+  - contentinfo [ref=e43]:
+    - button "Open Start menu" [ref=e44] [cursor=pointer]:
+      - generic [ref=e50]: Start
+    - generic [ref=e52]:
+      - button "Search" [ref=e53] [cursor=pointer]: ◎
+      - button "Play music" [ref=e54] [cursor=pointer]: ▶
+      - slider "Music volume" [ref=e59]: "35"
+      - button "Mute music" [ref=e60] [cursor=pointer]: 🔊
+      - button "Toggle CRT effects" [pressed] [ref=e62] [cursor=pointer]: CRT
+      - button "Enable UI sounds" [ref=e63] [cursor=pointer]: 🔇
+      - generic "Sunday, November 22, 2026" [ref=e64]: 05:14 PM

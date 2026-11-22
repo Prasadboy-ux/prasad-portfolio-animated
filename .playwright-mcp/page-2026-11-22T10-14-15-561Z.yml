@@ -1,0 +1,91 @@
+- generic [ref=e2]:
+  - main "Prasad Desktop" [ref=e4]:
+    - button "Pixel dog companion — click to greet":
+      - generic [ref=e5] [cursor=pointer]
+    - generic:
+      - button "COMPUTER — double-click, press Enter, or tap twice to open" [ref=e7]:
+        - generic [aria-hidden] [ref=e8]: ▣
+        - generic [ref=e9]: COMPUTER
+      - button "EXPERIENCE — double-click, press Enter, or tap twice to open" [ref=e10]:
+        - generic [aria-hidden] [ref=e11]: ▤
+        - generic [ref=e12]: EXPERIENCE
+      - button "SKILLS — double-click, press Enter, or tap twice to open" [ref=e13]:
+        - generic [aria-hidden] [ref=e14]: ▥
+        - generic [ref=e15]: SKILLS
+      - button "PROJECTS — double-click, press Enter, or tap twice to open" [active] [ref=e16]:
+        - generic [aria-hidden] [ref=e17]: ▦
+        - generic [ref=e18]: PROJECTS
+      - button "INTERNET — double-click, press Enter, or tap twice to open" [ref=e19]:
+        - generic [aria-hidden] [ref=e20]: ◎
+        - generic [ref=e21]: INTERNET
+      - button "EMAIL — double-click, press Enter, or tap twice to open" [ref=e22]:
+        - generic [aria-hidden] [ref=e23]: ✉
+        - generic [ref=e24]: EMAIL
+      - button "RESUME — double-click, press Enter, or tap twice to open" [ref=e25]:
+        - generic [aria-hidden] [ref=e26]: ▧
+        - generic [ref=e27]: RESUME
+      - button "NOTEPAD — double-click, press Enter, or tap twice to open" [ref=e28]:
+        - generic [aria-hidden] [ref=e29]: ▤
+        - generic [ref=e30]: NOTEPAD
+      - button "GAMES — double-click, press Enter, or tap twice to open" [ref=e31]:
+        - generic [aria-hidden] [ref=e32]: ◆
+        - generic [ref=e33]: GAMES
+      - button "WALLPAPER STUDIO — double-click, press Enter, or tap twice to open" [ref=e34]:
+        - generic [aria-hidden] [ref=e35]: ✧
+        - generic [ref=e36]: WALLPAPER STUDIO
+      - button "RECYCLE BIN — double-click, press Enter, or tap twice to open" [ref=e37]:
+        - generic [aria-hidden] [ref=e38]: ♲
+        - generic [ref=e39]: RECYCLE BIN
+      - button "SEARCH — double-click, press Enter, or tap twice to open" [ref=e40]:
+        - generic [aria-hidden] [ref=e41]: ◎
+        - generic [ref=e42]: SEARCH
+    - dialog "Projects — Project Folders" [ref=e287]:
+      - generic [ref=e288]:
+        - generic [aria-hidden] [ref=e289]: ▦
+        - generic [ref=e290]: Projects — Project Folders
+        - generic [ref=e291]:
+          - button "Minimize" [ref=e292] [cursor=pointer]: _
+          - button "Maximize" [ref=e293] [cursor=pointer]: □
+          - button "Close" [ref=e294] [cursor=pointer]: ×
+      - generic [aria-hidden] [ref=e295]:
+        - generic [ref=e296]: File
+        - generic [ref=e297]: Edit
+        - generic [ref=e298]: View
+        - generic [ref=e299]: Help
+      - generic [ref=e300]:
+        - heading "PROJECTS FOLDER" [level=2] [ref=e301]
+        - paragraph [ref=e302]: Double-click a folder to open its details
+        - generic [ref=e303]:
+          - button "▣ Glintara QC Tracker" [ref=e304] [cursor=pointer]:
+            - generic [ref=e305]: ▣
+            - generic [ref=e306]: Glintara QC Tracker
+          - button "◈ Digital IPQC/SPC" [ref=e307] [cursor=pointer]:
+            - generic [ref=e308]: ◈
+            - generic [ref=e309]: Digital IPQC/SPC
+          - button "▤ Outgassing Lab System" [ref=e310] [cursor=pointer]:
+            - generic [ref=e311]: ▤
+            - generic [ref=e312]: Outgassing Lab System
+          - button "$_ MOKA POS" [ref=e313] [cursor=pointer]:
+            - generic [ref=e314]: $_
+            - generic [ref=e315]: MOKA POS
+          - button "✦ AI Agent experiments" [ref=e316] [cursor=pointer]:
+            - generic [ref=e317]: ✦
+            - generic [ref=e318]: AI Agent experiments
+        - generic [ref=e319]: Links are only shown for projects with a verified public URL.
+      - generic [ref=e320]:
+        - generic [ref=e321]: C:\PRASAD\PROJECTS> READY
+        - generic [ref=e322]: PRASAD DESKTOP
+  - contentinfo [ref=e43]:
+    - button "Open Start menu" [ref=e44] [cursor=pointer]:
+      - generic [ref=e50]: Start
+    - button "Switch to Projects — Project Folders" [ref=e331] [cursor=pointer]:
+      - generic [ref=e333]: Projects — Project Folders
+    - generic [ref=e52]:
+      - button "Search" [ref=e53] [cursor=pointer]: ◎
+      - button "Pause music" [pressed] [ref=e113] [cursor=pointer]: ❚❚
+      - generic "Guitar Lofi" [ref=e114]
+      - slider "Music volume" [ref=e59]: "35"
+      - button "Mute music" [ref=e60] [cursor=pointer]: 🔊
+      - button "Toggle CRT effects" [pressed] [ref=e62] [cursor=pointer]: CRT
+      - button "Enable UI sounds" [ref=e63] [cursor=pointer]: 🔇
+      - generic "Sunday, November 22, 2026" [ref=e64]: 05:14 PM

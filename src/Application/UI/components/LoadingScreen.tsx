@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import eventBus from '../EventBus';
 import { PROFILE } from '../profile';
 
@@ -24,16 +24,16 @@ const LoadingScreen: React.FC<LoadingProps> = () => {
     const [counter, setCounter] = useState(0);
     const [resources] = useState<string[]>([]);
     const [mobileWarning, setMobileWarning] = useState(window.innerWidth < 768);
+    const [overlayMounted, setOverlayMounted] = useState(true);
+    const startButtonRef = useRef<HTMLButtonElement>(null);
 
-    const onResize = () => {
-        if (window.innerWidth < 768) {
-            setMobileWarning(true);
-        } else {
-            setMobileWarning(false);
-        }
-    };
-
-    window.addEventListener('resize', onResize);
+    useEffect(() => {
+        const onResize = () => {
+            setMobileWarning(window.innerWidth < 768);
+        };
+        window.addEventListener('resize', onResize);
+        return () => window.removeEventListener('resize', onResize);
+    }, []);
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -89,13 +89,22 @@ const LoadingScreen: React.FC<LoadingProps> = () => {
     }, [webGLError]);
 
     const start = useCallback(() => {
+        if (overlayOpacity === 0) return;
         setLoadingOverlayOpacity(0);
+        if (startButtonRef.current) startButtonRef.current.blur();
         eventBus.dispatch('loadingScreenDone', {});
         const ui = document.getElementById('ui');
         if (ui) {
             ui.style.pointerEvents = 'none';
         }
-    }, []);
+        // Remove the boot tree after the visual fade so it cannot be reached
+        // by keyboard or exposed as stale content in the accessibility tree.
+        window.setTimeout(() => setOverlayMounted(false), 250);
+    }, [overlayOpacity]);
+
+    useEffect(() => {
+        if (startPopupOpacity === 1) startButtonRef.current?.focus();
+    }, [startPopupOpacity]);
 
     const getSpace = (sourceName: string) => {
         let spaces = '';
@@ -128,11 +137,18 @@ const LoadingScreen: React.FC<LoadingProps> = () => {
         return false;
     };
 
+    if (!overlayMounted) return null;
+
     return (
         <div
+            role="region"
+            aria-label="Boot sequence"
+            aria-hidden={overlayOpacity === 0}
+            aria-busy={progress < 1 && !webGLError}
             style={Object.assign({}, styles.overlay, {
                 opacity: overlayOpacity,
                 transform: `scale(${overlayOpacity === 0 ? 1.1 : 1})`,
+                pointerEvents: overlayOpacity === 0 ? 'none' : 'auto',
             })}
         >
             {startPopupOpacity === 0 && loadingTextOpacity === 0 && (
@@ -151,7 +167,7 @@ const LoadingScreen: React.FC<LoadingProps> = () => {
                         className="loading-screen-header"
                     >
                         <div style={styles.logoContainer}>
-                            <img src="/images/header.jpg" style={styles.logoImage} alt={DISPLAY_NAME} />
+                            <img src="/images/header.jpg" width={42} height={42} style={styles.logoImage} alt={DISPLAY_NAME} />
                             <div>
                                 <p style={styles.green}>
                                     <b>Prasad,</b>{' '}
@@ -166,7 +182,7 @@ const LoadingScreen: React.FC<LoadingProps> = () => {
                             <p>PPBIOS (C)2026 Prakash Prasad Inc.,</p>
                         </div>
                     </div>
-                    <div style={styles.body} className="loading-screen-body">
+                    <div style={styles.body} className="loading-screen-body" aria-live="polite">
                         <p>PPS S13 2026 Special QA1S</p>
                         <div style={styles.spacer} />
                         {showBiosInfo && (
@@ -260,9 +276,14 @@ const LoadingScreen: React.FC<LoadingProps> = () => {
                             marginTop: '16px',
                         }}
                     >
-                        <div className="bios-start-button" onClick={start}>
-                            <p>START</p>
-                        </div>
+                        <button
+                            type="button"
+                            ref={startButtonRef}
+                            className="bios-start-button"
+                            onClick={start}
+                        >
+                            <span>START</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -397,7 +418,7 @@ const styles: StyleSheetCSS = {
         flexDirection: 'column',
     },
     logoImage: {
-        width: 64,
+        width: 42,
         height: 42,
         imageRendering: 'pixelated',
         marginRight: 16,

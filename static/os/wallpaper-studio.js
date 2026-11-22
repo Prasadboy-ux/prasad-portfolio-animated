@@ -492,7 +492,7 @@ export function wallpaperStudioView() {
                         <button type="button" class="btn primary" data-dog-action="wallpaper">SET WALLPAPER</button>
                         <button type="button" class="btn primary" data-dog-action="avatar">SET AS DESKTOP DOG</button>
                     </div>
-                    <p class="ws-note">Built-in dog skins keep the full walk / wave / sit / sleep animation set. Painted pups become a desktop avatar with a gentle bob and wave — arbitrary pixels cannot be automatically rigged with separate legs.</p>
+                    <p class="ws-note">Built-in dog skins support the full idle / walk / wave / sit / sleep / happy animation set. Painted pups become a desktop avatar with a gentle bob and wave — arbitrary pixels cannot be automatically rigged with separate legs.</p>
                 </div>
                 <div class="ws-canvas-wrap">
                     <canvas class="ws-canvas ws-dog-canvas" width="24" height="20" aria-label="Cute Dog drawing canvas"></canvas>
@@ -503,6 +503,7 @@ export function wallpaperStudioView() {
             <div class="ws-companion-settings">
                 <label class="ws-check"><input type="checkbox" data-dog-setting="visible" ${settings.dog.visible ? 'checked' : ''} /> SHOW DESKTOP DOG</label>
                 <label class="ws-check"><input type="checkbox" data-dog-setting="walking" ${settings.dog.walking ? 'checked' : ''} /> ALLOW WALKING</label>
+                <label class="ws-check"><input type="checkbox" data-dog-setting="speech" ${settings.dog.speech ? 'checked' : ''} /> SHOW SPEECH BUBBLES</label>
                 <label class="ws-check"><input type="checkbox" data-dog-setting="idleOnly" ${settings.dog.idleOnly ? 'checked' : ''} /> IDLE-ONLY MODE</label>
                 <div class="ws-field-row">
                     <label for="ws-dog-speed">ANIMATION SPEED <span data-dog-output="speed">${settings.dog.speed}</span></label>

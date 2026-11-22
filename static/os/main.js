@@ -37,6 +37,7 @@ const ICON_H = 88;
 const X_STEP = 96;
 const Y_STEP = 102;
 const POSITIONS_KEY = 'prasad-desktop-icon-positions';
+const ICON_LAYOUT_KEY = 'prasad-desktop-icon-layout';
 const SOUND_KEY = 'prasad-desktop-ui-sounds';
 const MUSIC_ENABLED_KEY = 'prasad-desktop-music-enabled';
 const MUSIC_VOLUME_KEY = 'prasad-desktop-music-volume';
@@ -80,6 +81,34 @@ function savePositions() {
     } catch (error) { /* storage unavailable */ }
 }
 
+function loadIconLayout() {
+    try {
+        return localStorage.getItem(ICON_LAYOUT_KEY) || '';
+    } catch (error) {
+        return '';
+    }
+}
+
+function saveIconLayout(signature) {
+    try {
+        localStorage.setItem(ICON_LAYOUT_KEY, signature);
+    } catch (error) { /* storage unavailable */ }
+}
+
+function iconLayout() {
+    const width = iconLayer.clientWidth;
+    const height = iconLayer.clientHeight;
+    const columns = Math.max(1, Math.floor((width - 12) / X_STEP));
+    const rows = Math.max(1, Math.floor((height - 12) / Y_STEP));
+    return {
+        columns,
+        rows,
+        signature: `${columns}x${rows}`,
+        maxLeft: Math.max(0, width - ICON_W - 4),
+        maxTop: Math.max(0, height - ICON_H - 4),
+    };
+}
+
 let iconPositions = loadPositions();
 
 function playSound(type = 'click') {
@@ -114,9 +143,9 @@ function selectIcon(element) {
     playSound('click');
 }
 
-function positionIcon(element, left, top) {
-    const maxLeft = Math.max(0, iconLayer.clientWidth - ICON_W - 4);
-    const maxTop = Math.max(0, iconLayer.clientHeight - ICON_H - 4);
+function positionIcon(element, left, top, bounds) {
+    const maxLeft = bounds ? bounds.maxLeft : Math.max(0, iconLayer.clientWidth - ICON_W - 4);
+    const maxTop = bounds ? bounds.maxTop : Math.max(0, iconLayer.clientHeight - ICON_H - 4);
     const safeLeft = clamp(Math.round(left), 4, maxLeft);
     const safeTop = clamp(Math.round(top), 4, maxTop);
     element.style.left = safeLeft + 'px';
@@ -125,18 +154,28 @@ function positionIcon(element, left, top) {
 }
 
 function layoutIcons(save = true) {
-    const columns = Math.max(1, Math.floor((iconLayer.clientWidth - 12) / X_STEP));
+    const { columns, signature, maxLeft, maxTop } = iconLayout();
+    const bounds = { maxLeft, maxTop };
+    const layoutChanged = loadIconLayout() !== signature;
+
+    // Saved coordinates only make sense for the grid they were created in.
+    // A breakpoint/orientation change starts from a clean grid instead of
+    // clamping every desktop icon into the same corner.
+    if (layoutChanged) iconPositions = {};
+
     iconLayer.querySelectorAll('.desktop-icon').forEach((element, index) => {
         const id = element.dataset.app;
-        if (iconPositions[id]) {
-            const saved = iconPositions[id];
-            positionIcon(element, saved.left, saved.top);
-            return;
-        }
-        const position = positionIcon(element, 18 + (index % columns) * X_STEP, 14 + Math.floor(index / columns) * Y_STEP);
+        const saved = iconPositions[id];
+        const position = saved
+            ? positionIcon(element, saved.left, saved.top, bounds)
+            : positionIcon(element, 18 + (index % columns) * X_STEP, 14 + Math.floor(index / columns) * Y_STEP, bounds);
         iconPositions[id] = position;
     });
-    if (save) savePositions();
+
+    if (save || layoutChanged) {
+        savePositions();
+        saveIconLayout(signature);
+    }
 }
 
 function makeDesktopIcon(app) {
@@ -264,7 +303,10 @@ function renderTaskbar() {
             button.addEventListener('click', () => {
                 if (win.minimized) restoreWindow(win);
                 else if (win.active) minimizeWindow(win);
-                else focusWindow(win);
+                else {
+                    focusWindow(win);
+                    focusWindowElement(win);
+                }
                 playSound('click');
             });
             taskButtons.appendChild(button);
@@ -276,6 +318,14 @@ function renderTaskbar() {
         button.innerHTML = `<span class="dot ${win.active ? 'active-dot' : ''}"></span><span>${win.meta.title}</span>`;
     });
     existing.forEach((button) => button.remove());
+}
+
+function focusWindowElement(win) {
+    try {
+        win.element.focus({ preventScroll: true });
+    } catch (error) {
+        win.element.focus();
+    }
 }
 
 function focusWindow(win) {
@@ -292,14 +342,16 @@ function focusWindow(win) {
     renderTaskbar();
 }
 
-function focusTopWindow() {
+function focusTopWindow(focusElement = false) {
     const candidates = [...windows.values()].filter((win) => !win.minimized);
     if (!candidates.length) {
         renderTaskbar();
         return;
     }
     candidates.sort((a, b) => Number(a.element.style.zIndex || 0) - Number(b.element.style.zIndex || 0));
-    focusWindow(candidates[candidates.length - 1]);
+    const top = candidates[candidates.length - 1];
+    focusWindow(top);
+    if (focusElement) focusWindowElement(top);
 }
 
 function minimizeWindow(win) {
@@ -313,6 +365,7 @@ function minimizeWindow(win) {
 
 function restoreWindow(win) {
     focusWindow(win);
+    focusWindowElement(win);
 }
 
 /* --------------------- window geometry + snap helpers --------------------- */
@@ -422,6 +475,7 @@ function toggleMaximize(win) {
 }
 
 function closeWindow(win) {
+    const returnFocus = win.returnFocus;
     try {
         if (win.view.cleanup) win.view.cleanup(win.body, win);
     } catch (error) { /* cleanup is best effort */ }
@@ -430,7 +484,14 @@ function closeWindow(win) {
     windows.delete(win.id);
     if (appWindows.get(win.appId) === win.id) appWindows.delete(win.appId);
     playSound('close');
-    focusTopWindow();
+    const remaining = [...windows.values()].filter((item) => !item.minimized);
+    if (remaining.length) {
+        focusTopWindow(true);
+    } else if (returnFocus && returnFocus.isConnected) {
+        returnFocus.focus({ preventScroll: true });
+    } else {
+        renderTaskbar();
+    }
 }
 
 function attachWindowDrag(win) {
@@ -574,11 +635,16 @@ function attachWindowResize(win) {
 }
 
 function openWindow(appId, options = {}) {
+    const opener = document.activeElement;
+    const returnFocus = opener && opener.isConnected && !opener.closest('.window, #command-overlay, #shutdown-overlay')
+        ? opener
+        : null;
     const unique = options.unique || appId === 'project' || appId === 'job';
     if (!unique && appWindows.has(appId)) {
         const existing = windows.get(appWindows.get(appId));
         if (existing) {
             focusWindow(existing);
+            focusWindowElement(existing);
             playSound('open');
             return existing;
         }
@@ -591,6 +657,7 @@ function openWindow(appId, options = {}) {
     element.className = 'window';
     element.setAttribute('role', 'dialog');
     element.setAttribute('aria-label', meta.title);
+    element.setAttribute('tabindex', '-1');
 
     const isGrey = ['games', 'recycle', 'projects', 'skills', 'wallpaper'].includes(appId);
     element.innerHTML = `
@@ -625,6 +692,7 @@ function openWindow(appId, options = {}) {
         maximized: false,
         snapped: null,
         previousRect: null,
+        returnFocus,
     };
 
     const minSize = minWindowSize();
@@ -651,9 +719,10 @@ function openWindow(appId, options = {}) {
     attachWindowDrag(win);
     attachWindowResize(win);
 
+    focusWindow(win);
+    focusWindowElement(win);
     win.body.innerHTML = view.html;
     if (view.mount) view.mount(win.body, win, appContext);
-    focusWindow(win);
     playSound('open');
     return win;
 }
@@ -666,6 +735,26 @@ function isTypingTarget(target) {
 
 function isModalUiOpen() {
     return !commandOverlay.hidden || !shutdownOverlay.hidden || !startMenu.hidden || !contextMenu.hidden;
+}
+
+function trapFocusWithin(event, container) {
+    if (event.key !== 'Tab') return;
+    const focusable = [...container.querySelectorAll('button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [href], [tabindex]:not([tabindex="-1"])')]
+        .filter((element) => !element.hidden && element.getClientRects().length);
+    if (!focusable.length) {
+        event.preventDefault();
+        return;
+    }
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    const outside = !container.contains(document.activeElement);
+    if (event.shiftKey && (outside || document.activeElement === first)) {
+        event.preventDefault();
+        last.focus();
+    } else if (!event.shiftKey && (outside || document.activeElement === last)) {
+        event.preventDefault();
+        first.focus();
+    }
 }
 
 function isSearchWindowOpen() {
@@ -877,6 +966,7 @@ document.addEventListener('keydown', (event) => {
     }
 
     if (!commandOverlay.hidden) {
+        trapFocusWithin(event, commandOverlay);
         if (event.key === 'Escape') { event.preventDefault(); closeCommandPalette(); return; }
         if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
             event.preventDefault();
@@ -892,6 +982,8 @@ document.addEventListener('keydown', (event) => {
             return;
         }
     }
+
+    if (!shutdownOverlay.hidden) trapFocusWithin(event, shutdownOverlay);
 
     if (event.key === 'Escape') {
         if (!shutdownOverlay.hidden) hideShutdownOverlay();

@@ -1,0 +1,87 @@
+- generic [ref=e2]:
+  - main "Prasad Desktop" [ref=e4]:
+    - button "Pixel dog companion — click to greet":
+      - generic [ref=e5] [cursor=pointer]
+    - generic:
+      - button "COMPUTER — double-click, press Enter, or tap twice to open" [ref=e7]:
+        - generic [aria-hidden] [ref=e8]: ▣
+        - generic [ref=e9]: COMPUTER
+      - button "EXPERIENCE — double-click, press Enter, or tap twice to open" [ref=e10]:
+        - generic [aria-hidden] [ref=e11]: ▤
+        - generic [ref=e12]: EXPERIENCE
+      - button "SKILLS — double-click, press Enter, or tap twice to open" [ref=e13]:
+        - generic [aria-hidden] [ref=e14]: ▥
+        - generic [ref=e15]: SKILLS
+      - button "PROJECTS — double-click, press Enter, or tap twice to open" [ref=e16]:
+        - generic [aria-hidden] [ref=e17]: ▦
+        - generic [ref=e18]: PROJECTS
+      - button "INTERNET — double-click, press Enter, or tap twice to open" [ref=e19]:
+        - generic [aria-hidden] [ref=e20]: ◎
+        - generic [ref=e21]: INTERNET
+      - button "EMAIL — double-click, press Enter, or tap twice to open" [active] [ref=e22]:
+        - generic [aria-hidden] [ref=e23]: ✉
+        - generic [ref=e24]: EMAIL
+      - button "RESUME — double-click, press Enter, or tap twice to open" [ref=e25]:
+        - generic [aria-hidden] [ref=e26]: ▧
+        - generic [ref=e27]: RESUME
+      - button "NOTEPAD — double-click, press Enter, or tap twice to open" [ref=e28]:
+        - generic [aria-hidden] [ref=e29]: ▤
+        - generic [ref=e30]: NOTEPAD
+      - button "GAMES — double-click, press Enter, or tap twice to open" [ref=e31]:
+        - generic [aria-hidden] [ref=e32]: ◆
+        - generic [ref=e33]: GAMES
+      - button "WALLPAPER STUDIO — double-click, press Enter, or tap twice to open" [ref=e34]:
+        - generic [aria-hidden] [ref=e35]: ✧
+        - generic [ref=e36]: WALLPAPER STUDIO
+      - button "RECYCLE BIN — double-click, press Enter, or tap twice to open" [ref=e37]:
+        - generic [aria-hidden] [ref=e38]: ♲
+        - generic [ref=e39]: RECYCLE BIN
+      - button "SEARCH — double-click, press Enter, or tap twice to open" [ref=e40]:
+        - generic [aria-hidden] [ref=e41]: ◎
+        - generic [ref=e42]: SEARCH
+    - dialog "Mail — Contact Me" [ref=e391]:
+      - generic [ref=e392]:
+        - generic [aria-hidden] [ref=e393]: ✉
+        - generic [ref=e394]: Mail — Contact Me
+        - generic [ref=e395]:
+          - button "Minimize" [ref=e396] [cursor=pointer]: _
+          - button "Maximize" [ref=e397] [cursor=pointer]: □
+          - button "Close" [ref=e398] [cursor=pointer]: ×
+      - generic [aria-hidden] [ref=e399]:
+        - generic [ref=e400]: File
+        - generic [ref=e401]: Edit
+        - generic [ref=e402]: View
+        - generic [ref=e403]: Help
+      - generic [ref=e404]:
+        - heading "CONTACT.EXE" [level=2] [ref=e405]
+        - paragraph [ref=e406]: Let's build something together? 💚
+        - generic [ref=e407]:
+          - generic [ref=e408]: ✉
+          - generic [ref=e409]:
+            - generic [ref=e410]: EMAIL ADDRESS
+            - strong [ref=e411]: Mastereditor11@gmail.com
+        - paragraph [ref=e412]: Got an idea, a role, or just want to say hi? My inbox is open.
+        - generic [ref=e413]:
+          - link "SEND MESSAGE ✉" [ref=e414] [cursor=pointer]:
+            - /url: mailto:Mastereditor11@gmail.com?subject=Hello%20from%20your%20portfolio
+          - link "LINKEDIN ↗" [ref=e415] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/prakash-prasad-550a1a1/
+          - link "GITHUB ↗" [ref=e416] [cursor=pointer]:
+            - /url: https://github.com/Prasadboy-ux
+      - generic [ref=e417]:
+        - generic [ref=e418]: C:\PRASAD\EMAIL> READY
+        - generic [ref=e419]: PRASAD DESKTOP
+  - contentinfo [ref=e43]:
+    - button "Open Start menu" [ref=e44] [cursor=pointer]:
+      - generic [ref=e50]: Start
+    - button "Switch to Mail — Contact Me" [ref=e428] [cursor=pointer]:
+      - generic [ref=e430]: Mail — Contact Me
+    - generic [ref=e52]:
+      - button "Search" [ref=e53] [cursor=pointer]: ◎
+      - button "Pause music" [pressed] [ref=e113] [cursor=pointer]: ❚❚
+      - generic "Guitar Lofi" [ref=e114]
+      - slider "Music volume" [ref=e59]: "35"
+      - button "Mute music" [ref=e60] [cursor=pointer]: 🔊
+      - button "Toggle CRT effects" [pressed] [ref=e62] [cursor=pointer]: CRT
+      - button "Enable UI sounds" [ref=e63] [cursor=pointer]: 🔇
+      - generic "Sunday, November 22, 2026" [ref=e64]: 05:14 PM

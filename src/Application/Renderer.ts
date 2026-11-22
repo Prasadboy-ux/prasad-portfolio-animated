@@ -113,7 +113,8 @@ export default class Renderer {
     }
 
     update() {
-        this.application.camera.instance.updateProjectionMatrix();
+        // Projection is refreshed in Camera.resize(); no need to recompute it
+        // on every animation frame.
         if (this.uniforms) {
             this.uniforms.u_time.value = Math.sin(this.time.current * 0.01);
         }

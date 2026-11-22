@@ -1,0 +1,35 @@
+- generic [active]:
+  - generic [ref=f4e1] [cursor=pointer]
+  - generic [ref=f4e4]:
+    - generic [ref=f4e5]:
+      - generic [ref=f4e6]:
+        - generic [ref=f4e7]:
+          - img "Prakash Prasad" [ref=f4e8]
+          - generic [ref=f4e9]:
+            - paragraph [ref=f4e10]: Prasad,
+            - paragraph [ref=f4e11]: Prakash Inc.
+        - generic [ref=f4e12]:
+          - paragraph [ref=f4e13]: "Released: 11/22/2026"
+          - paragraph [ref=f4e14]: PPBIOS (C)2026 Prakash Prasad Inc.,
+      - generic [ref=f4e15]:
+        - paragraph [ref=f4e16]: PPS S13 2026 Special QA1S
+        - paragraph [ref=f4e18]: PPS Showcase(tm) XX 113
+        - paragraph [ref=f4e19]: "Checking RAM : 14000 OK"
+        - paragraph [ref=f4e22]: LOADING RESOURCES (17/19)
+        - generic [ref=f4e24]:
+          - paragraph [ref=f4e25]: Loaded keyboardKeydown2 ... 53%
+          - paragraph [ref=f4e26]: Loaded mouseDown ... 58%
+          - paragraph [ref=f4e27]: Loaded keyboardKeydown5 ... 63%
+          - paragraph [ref=f4e28]: Loaded keyboardKeydown1 ... 68%
+          - paragraph [ref=f4e29]: Loaded keyboardKeydown3 ... 74%
+          - paragraph [ref=f4e30]: Loaded keyboardKeydown4 ... 79%
+          - paragraph [ref=f4e31]: Loaded keyboardKeydown6 ... 84%
+          - paragraph [ref=f4e32]: Loaded ccType ... 89%
+      - generic [ref=f4e36]:
+        - paragraph [ref=f4e37]: Press DEL to enter SETUP , ESC to skip memory test
+        - paragraph [ref=f4e38]: 11/22/2026
+    - generic [ref=f4e40]:
+      - paragraph [ref=f4e41]: Prakash Prasad Portfolio Showcase 2026
+      - paragraph [ref=f4e42]: QUALITY ASSURANCE ENGINEER | MANUFACTURING QUALITY | QUALITY SYSTEMS | ISO & IATF
+      - paragraph [ref=f4e44]: Click start to begin
+      - paragraph [ref=f4e48]: START

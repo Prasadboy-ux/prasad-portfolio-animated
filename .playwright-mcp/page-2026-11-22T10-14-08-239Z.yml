@@ -1,0 +1,129 @@
+- generic [ref=e2]:
+  - main "Prasad Desktop" [ref=e4]:
+    - button "Pixel dog companion — click to greet":
+      - generic [ref=e5] [cursor=pointer]
+    - generic:
+      - button "COMPUTER — double-click, press Enter, or tap twice to open" [ref=e7]:
+        - generic [aria-hidden] [ref=e8]: ▣
+        - generic [ref=e9]: COMPUTER
+      - button "EXPERIENCE — double-click, press Enter, or tap twice to open" [active] [ref=e10]:
+        - generic [aria-hidden] [ref=e11]: ▤
+        - generic [ref=e12]: EXPERIENCE
+      - button "SKILLS — double-click, press Enter, or tap twice to open" [ref=e13]:
+        - generic [aria-hidden] [ref=e14]: ▥
+        - generic [ref=e15]: SKILLS
+      - button "PROJECTS — double-click, press Enter, or tap twice to open" [ref=e16]:
+        - generic [aria-hidden] [ref=e17]: ▦
+        - generic [ref=e18]: PROJECTS
+      - button "INTERNET — double-click, press Enter, or tap twice to open" [ref=e19]:
+        - generic [aria-hidden] [ref=e20]: ◎
+        - generic [ref=e21]: INTERNET
+      - button "EMAIL — double-click, press Enter, or tap twice to open" [ref=e22]:
+        - generic [aria-hidden] [ref=e23]: ✉
+        - generic [ref=e24]: EMAIL
+      - button "RESUME — double-click, press Enter, or tap twice to open" [ref=e25]:
+        - generic [aria-hidden] [ref=e26]: ▧
+        - generic [ref=e27]: RESUME
+      - button "NOTEPAD — double-click, press Enter, or tap twice to open" [ref=e28]:
+        - generic [aria-hidden] [ref=e29]: ▤
+        - generic [ref=e30]: NOTEPAD
+      - button "GAMES — double-click, press Enter, or tap twice to open" [ref=e31]:
+        - generic [aria-hidden] [ref=e32]: ◆
+        - generic [ref=e33]: GAMES
+      - button "WALLPAPER STUDIO — double-click, press Enter, or tap twice to open" [ref=e34]:
+        - generic [aria-hidden] [ref=e35]: ✧
+        - generic [ref=e36]: WALLPAPER STUDIO
+      - button "RECYCLE BIN — double-click, press Enter, or tap twice to open" [ref=e37]:
+        - generic [aria-hidden] [ref=e38]: ♲
+        - generic [ref=e39]: RECYCLE BIN
+      - button "SEARCH — double-click, press Enter, or tap twice to open" [ref=e40]:
+        - generic [aria-hidden] [ref=e41]: ◎
+        - generic [ref=e42]: SEARCH
+    - dialog "Experience — Career Timeline" [ref=e115]:
+      - generic [ref=e116]:
+        - generic [aria-hidden] [ref=e117]: ▤
+        - generic [ref=e118]: Experience — Career Timeline
+        - generic [ref=e119]:
+          - button "Minimize" [ref=e120] [cursor=pointer]: _
+          - button "Maximize" [ref=e121] [cursor=pointer]: □
+          - button "Close" [ref=e122] [cursor=pointer]: ×
+      - generic [aria-hidden] [ref=e123]:
+        - generic [ref=e124]: File
+        - generic [ref=e125]: Edit
+        - generic [ref=e126]: View
+        - generic [ref=e127]: Help
+      - generic [ref=e128]:
+        - heading "EXPERIENCE.EXE" [level=2] [ref=e129]
+        - paragraph [ref=e130]: Career timeline — newest to oldest
+        - generic [ref=e131]:
+          - article [ref=e134]:
+            - generic [ref=e135]:
+              - heading "Assistant QA Engineer" [level=3] [ref=e136]
+              - generic [ref=e137]: CURRENT
+            - generic [ref=e138]:
+              - strong [ref=e139]: PT HLN Batam
+              - text: • Mar 2025 – Present • Batam, Indonesia
+            - list [ref=e140]:
+              - listitem [ref=e141]: Support IQC, IPQC, FQI, and OQC.
+              - listitem [ref=e142]: "Perform rubber material physical property testing: tensile strength, elongation, hardness, compression set, and other requirements."
+              - listitem [ref=e143]: Support First Article (FA) activities and reports.
+              - listitem [ref=e144]: Calibration activities and instrument documentation.
+            - generic [ref=e145]:
+              - button "VIEW FULL EXPERIENCE ▾" [ref=e146] [cursor=pointer]
+              - button "OPEN FULL DESCRIPTION ↗" [ref=e147] [cursor=pointer]
+          - article [ref=e150]:
+            - heading "Advisor & Analyst" [level=3] [ref=e152]
+            - generic [ref=e153]:
+              - strong [ref=e154]: Glintara Digital
+              - text: • Aug 2026 • Hybrid
+            - list [ref=e155]:
+              - listitem [ref=e156]: Business strategy and digital transformation.
+              - listitem [ref=e157]: Business process analysis and optimization.
+              - listitem [ref=e158]: Software requirements gathering and validation.
+              - listitem [ref=e159]: Collaboration with developers and project teams.
+            - generic [ref=e160]:
+              - button "VIEW FULL EXPERIENCE ▾" [ref=e161] [cursor=pointer]
+              - button "OPEN FULL DESCRIPTION ↗" [ref=e162] [cursor=pointer]
+          - article [ref=e165]:
+            - heading "Lead Auditor — Freelance" [level=3] [ref=e167]
+            - generic [ref=e168]:
+              - strong [ref=e169]: PT DiGiSi GLOBAL SURVEY
+              - text: • May 2024 – Mar 2025 • Batam, Indonesia
+            - list [ref=e170]:
+              - listitem [ref=e171]: Conduct third-party certification and surveillance audits.
+              - listitem [ref=e172]: Lead and coordinate audit teams.
+              - listitem [ref=e173]: Assess processes and documents against ISO standards.
+              - listitem [ref=e174]: Identify nonconformities and prepare reports.
+            - generic [ref=e175]:
+              - button "VIEW FULL EXPERIENCE ▾" [ref=e176] [cursor=pointer]
+              - button "OPEN FULL DESCRIPTION ↗" [ref=e177] [cursor=pointer]
+          - article [ref=e180]:
+            - heading "QC Inspector" [level=3] [ref=e182]
+            - generic [ref=e183]:
+              - strong [ref=e184]: PT PCI
+              - text: • Nov 2020 – Mar 2025 • Riau Islands, Indonesia
+            - list [ref=e185]:
+              - listitem [ref=e186]: Incoming, in-process, and final inspection.
+              - listitem [ref=e187]: Visual inspection and dimensional measurement.
+              - listitem [ref=e188]: IPC-A-610 workmanship inspection.
+              - listitem [ref=e189]: QC reporting and defect recording.
+            - generic [ref=e190]:
+              - button "VIEW FULL EXPERIENCE ▾" [ref=e191] [cursor=pointer]
+              - button "OPEN FULL DESCRIPTION ↗" [ref=e192] [cursor=pointer]
+      - generic [ref=e193]:
+        - generic [ref=e194]: C:\PRASAD\EXPERIENCE> READY
+        - generic [ref=e195]: PRASAD DESKTOP
+  - contentinfo [ref=e43]:
+    - button "Open Start menu" [ref=e44] [cursor=pointer]:
+      - generic [ref=e50]: Start
+    - button "Switch to Experience — Career Timeline" [ref=e204] [cursor=pointer]:
+      - generic [ref=e206]: Experience — Career Timeline
+    - generic [ref=e52]:
+      - button "Search" [ref=e53] [cursor=pointer]: ◎
+      - button "Pause music" [pressed] [ref=e113] [cursor=pointer]: ❚❚
+      - generic "Guitar Lofi" [ref=e114]
+      - slider "Music volume" [ref=e59]: "35"
+      - button "Mute music" [ref=e60] [cursor=pointer]: 🔊
+      - button "Toggle CRT effects" [pressed] [ref=e62] [cursor=pointer]: CRT
+      - button "Enable UI sounds" [ref=e63] [cursor=pointer]: 🔇
+      - generic "Sunday, November 22, 2026" [ref=e64]: 05:14 PM

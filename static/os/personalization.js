@@ -34,6 +34,7 @@ const DEFAULT_SETTINGS = {
         visible: true,
         walking: true,
         idleOnly: false,
+        speech: true,
         speed: 1,
         size: 1,
         skin: 'classic',
@@ -101,6 +102,7 @@ function loadSettings() {
     loaded.colorReduction = clamp(loaded.colorReduction, 2, 32);
     loaded.dog.speed = clamp(loaded.dog.speed, 0.25, 2.5);
     loaded.dog.size = clamp(loaded.dog.size, 0.7, 1.6);
+    loaded.dog.speech = loaded.dog.speech !== false;
     return loaded;
 }
 
@@ -150,6 +152,7 @@ export function updateSettings(patch = {}) {
     settings.colorReduction = clamp(settings.colorReduction, 2, 32);
     settings.dog.speed = clamp(settings.dog.speed, 0.25, 2.5);
     settings.dog.size = clamp(settings.dog.size, 0.7, 1.6);
+    settings.dog.speech = settings.dog.speech !== false;
     const saved = persist(settings);
     notify();
     if ((!saved.dataSaved || !saved.settingsSaved) && typeof window !== 'undefined' && window.__prasadStorageNotice !== true) {
