@@ -1,0 +1,10 @@
+node_modules
+package-lock.json
+.DS_Store
+*.psd
+
+public/
+.env
+
+# Original supplied music source (large file); web copy is static/audio/music/Guitar-Lofi.Mp3
+src/Application/Audio/*.mp3

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#008080" />
+    <title>PRASAD DESKTOP</title>
+    <link rel="icon" href="/images/favicon.ico" />
+    <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+    <div class="screen">
+        <div class="wallpaper" id="wallpaper" aria-hidden="true"></div>
+
+        <main class="desktop" id="desktop" aria-label="Prasad Desktop">
+            <div class="icon-layer" id="icon-layer"></div>
+            <div class="window-layer" id="window-layer"></div>
+            <div class="snap-preview" id="snap-preview" hidden aria-hidden="true"></div>
+        </main>
+
+        <div class="start-menu bevel-out" id="start-menu" hidden>
+            <div class="start-menu-side"><span>PRASAD DESKTOP</span></div>
+            <div class="start-menu-items">
+                <button type="button" class="menu-item" data-app="computer"><span class="mi-icon">▣</span>My Profile</button>
+                <button type="button" class="menu-item" data-app="experience"><span class="mi-icon">▤</span>Experience</button>
+                <button type="button" class="menu-item" data-app="projects"><span class="mi-icon">▦</span>Projects</button>
+                <button type="button" class="menu-item" data-app="games"><span class="mi-icon">◆</span>Games</button>
+                <div class="menu-separator"></div>
+                <button type="button" class="menu-item" data-app="search"><span class="mi-icon">◎</span>Search</button>
+                <button type="button" class="menu-item" data-app="resume"><span class="mi-icon">▧</span>Resume</button>
+                <button type="button" class="menu-item" data-app="email"><span class="mi-icon">✉</span>Contact</button>
+                <div class="menu-separator"></div>
+                <button type="button" class="menu-item" id="shutdown-item"><span class="mi-icon">⏻</span>Shut Down...</button>
+            </div>
+        </div>
+
+        <div class="context-menu bevel-out" id="context-menu" hidden>
+            <button type="button" data-action="refresh">Refresh</button>
+            <button type="button" data-action="arrange">Arrange Icons</button>
+            <button type="button" data-action="personalize">Personalize</button>
+        </div>
+
+        <div class="command-overlay" id="command-overlay" hidden>
+            <div class="command-panel bevel-out" role="dialog" aria-modal="true" aria-label="Command palette">
+                <div class="titlebar">
+                    <span class="title-icon">⌘</span>
+                    <span class="title-text">PRASAD DESKTOP — COMMAND PALETTE</span>
+                    <button type="button" class="window-control" id="command-close" aria-label="Close command palette">×</button>
+                </div>
+                <div class="command-body">
+                    <div class="command-input-wrap">
+                        <span>C:\&gt;</span>
+                        <input class="command-input" id="command-input" type="text" placeholder="Type a command..." autocomplete="off" spellcheck="false" aria-label="Command" />
+                    </div>
+                    <div class="command-results" id="command-results"></div>
+                    <div class="command-footer">↑ ↓ to navigate • Enter to run • Esc to close</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shutdown-overlay" id="shutdown-overlay" hidden role="dialog" aria-modal="true" aria-label="Shut down">
+            <div class="shutdown-card bevel-out">
+                <div class="shutdown-emoji">👋</div>
+                <h1>It's safe to close this window.</h1>
+                <p>Thanks for visiting Prasad Desktop! See you again 👋</p>
+                <button type="button" class="btn primary" id="shutdown-back">BACK TO DESKTOP</button>
+            </div>
+        </div>
+
+        <footer class="taskbar" id="taskbar">
+            <button type="button" class="start-button" id="start-button" aria-label="Open Start menu" aria-expanded="false">
+                <span class="win-flag" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+                <span>Start</span>
+            </button>
+            <div class="taskbar-divider" aria-hidden="true"></div>
+            <div class="task-buttons" id="task-buttons"></div>
+            <div class="tray">
+                <button type="button" id="search-button" title="Search" aria-label="Search">◎</button>
+                <button type="button" id="music-toggle" title="Play Guitar Lofi" aria-label="Play music" aria-pressed="false">▶</button>
+                <span class="music-eq" id="music-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="track-name" title="Guitar Lofi">Guitar Lofi</span>
+                <input class="music-volume" id="music-volume" type="range" min="0" max="100" value="35" aria-label="Music volume" title="Music volume" />
+                <button type="button" id="music-mute" title="Mute music" aria-label="Mute music">🔊</button>
+                <span class="tray-sep" aria-hidden="true"></span>
+                <button type="button" id="crt-toggle" title="Toggle CRT effects" aria-label="Toggle CRT effects" aria-pressed="true">CRT</button>
+                <button type="button" id="sound-toggle" title="Enable UI sounds" aria-label="Enable UI sounds" aria-pressed="false">🔇</button>
+                <span class="clock" id="clock" title="Local time">--:--</span>
+            </div>
+        </footer>
+
+        <div class="crt-lines" aria-hidden="true"></div>
+    </div>
+
+    <script type="module" src="./main.js"></script>
+</body>
+
+</html>

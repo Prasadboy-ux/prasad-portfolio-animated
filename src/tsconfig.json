@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "lib": ["ES2017", "DOM"],
+        "moduleResolution": "node",
+        "strict": true,
+        "skipLibCheck": true,
+        "types": [],
+        "paths": {
+            "three/examples/jsm/libs/dat.gui.module": ["../node_modules/@types/dat.gui"]
+        },
+        "strictPropertyInitialization": false,
+        "allowSyntheticDefaultImports": true,
+        "jsx": "react",
+    },
+    
+    "include": ["Application/*", "./*"],
+}
